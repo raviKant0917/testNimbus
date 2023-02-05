@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
-const DB='mongodb://0.0.0.0:27017/nimbus-backend';
+const DB = "mongodb+srv://ravi:nimbus2k23@cluster0.ahvyxrx.mongodb.net/?retryWrites=true&w=majority"
+const connectionParams={
+    useNewUrlParser: true,
+    useUnifiedTopology: true 
+}
 
 const Connection = async () => {
     
