@@ -6,14 +6,11 @@ const connectionParams={
     useUnifiedTopology: true 
 }
 
-const Connection = async () => {
-    
+export const Connection = async () => {
     try {
-        await mongoose.connect(DB);
+        await mongoose.connect(DB,connectionParams);
         console.log('Database connected successfully');
     } catch (error) {
         console.log('Error while connecting to the database ', error);
     }
 };
-
-export default Connection;

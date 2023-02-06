@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose';
-import Connection from './database/db.js';
+import { Connection } from './database/db.js';
 import Router from './routes/route.js';
 
 mongoose.set('strictQuery', false);
