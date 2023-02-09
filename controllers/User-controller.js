@@ -31,9 +31,10 @@ export const getUsersByName = async(req,res)=>{
         })       
     } catch (e) {
         res.status(500).json({
-            message: "Something is wrong!"
+            status: "failed",
+            error: e.message
         })
-        console.log(e);
+        console.log(e.message);
     }
 }
 
@@ -53,7 +54,8 @@ export const getUserById = async(req,res)=>{
         })
     } catch (e) {
         res.status(500).json({
-            message: "Something went wrong!"
+            status: "failed",
+            error: e.message
         })
     }
 }
@@ -96,8 +98,10 @@ export const postUsers = async(req,res)=>{
         })
         
     } catch (e) {
-        console.log(e);
-        res.status(500).json({message: "Something went wrong!"})        
+        res.status(500).json({
+            status: "failed",
+            error: e.message
+        })        
     }    
 }
 
@@ -114,7 +118,10 @@ export const patchUser = async(req,res)=>{
             body: userFound
         })
     } catch (e) {
-        res.status(500).json({message: "Something went wrong!"})
+        res.status(500).json({
+            status: "failed",
+            error: e.message
+        })
     }
     const userFound = await User.findByIdAndUpdate(id,details);
     
@@ -132,8 +139,9 @@ export const deleteUser = async (req,res) => {
             deleted: result
         })
     } catch (e) {
-        res.status(401).json({
-            message: "Somthing went wrong"
+        res.status(501).json({
+            status: "failed",
+            error: e.message
         })
     }
 }

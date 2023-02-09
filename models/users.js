@@ -9,7 +9,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         minLength: 5,
         maxLength: 128,
-        null: false,
         required: true,
         unique: true
     },
@@ -27,18 +26,12 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
-        // validate(value){
-            //     if(!isEmail(value)){
-                //         throw new Error("invalid email type")
-                //     }
-                // }
+        required: true
     },
     fullName: {
         type: String,
         minLength: 2,
         maxLength: 255,
-        null: false,
         required: true
     },
     omegeleReports : {
