@@ -49,7 +49,6 @@ const userSchema = new mongoose.Schema({
     instaId: {
         type: String,
         null: true,
-        required: false,
         default: "",
         maxLength: 250
     },
