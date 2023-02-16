@@ -104,6 +104,7 @@
  *                          items:
  *                              $ref: '#/components/schemas/User' 
 */
+
 /**
  * @swagger
  * /users/search/{key}:
