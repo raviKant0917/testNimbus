@@ -16,7 +16,11 @@ const { Schema } = mongoose;
       options: [{
         type: String,
         required: true
-      }]
+      }],
+      answer: {
+        type: Number,
+        required: true
+      }
  });
 
 export default mongoose.model('Question', QuestionModel);
