@@ -8,9 +8,12 @@ import  Questions  from '../models/questionSchema.js'
 export async function getQuestions(req,res){
      try {
         const q = await Questions.find();
-        res.json(q) 
+        res.status(202).json(q) 
      } catch (error) {
-        res.json(error);
+        res.status(500).json({
+          status: 'failed',
+          message: error.message
+        })
      };
     
 }
@@ -20,14 +23,18 @@ export async function insertQuestions(req,res){
     const newQuestion = new Questions({
         id: req.body.id,
         question: req.body.question,
-        options: req.body.options
+        options: req.body.options,
+        answer: req.body.answer
       });
     
       try {
         const savedQuestion = await newQuestion.save();
-        res.json(savedQuestion);
+        res.status(200).json({
+          success: true,
+          result: savedQuestion
+        });
       } catch (err) {
-        res.status(400).json({ message: err });
+        res.status(400).json({ message: err.message });
       }
     }
 
@@ -37,9 +44,9 @@ export async function insertQuestions(req,res){
 export async function deleteQuestions(req,res){
  try {
     const d = await Questions.deleteMany();
- res.json({msg: "question deleted"});
+ res.status(200).json({msg: "question deleted"});
  } catch (error) {
-    re.json(error)
+    res.json(error)
  }
 
 }
@@ -48,8 +55,15 @@ export async function deleteQuestions(req,res){
 
 export async function getResult(req,res){
  
-    const r = await Result.find();
+    try {
+      const r = await Result.find();
     res.json(r);
+    } catch (error) {
+      res.status(500).json({
+        success: false,
+        message: error.message
+      })
+    }
     
 }
 
@@ -69,7 +83,7 @@ export async function postResult(req,res){
     
       try {
         const savedQuestion = await newQuestion.save();
-        res.json(savedQuestion);
+        res.status(200).json(savedQuestion);
       } catch (err) {
         res.status(400).json({ message: err });
       }
@@ -81,9 +95,8 @@ export async function postResult(req,res){
 export async function deleteResult(req,res){
     try {
         const d = await Result.deleteMany();
-     res.json({msg: "result deleted"});
+     res.status(200).json({msg: "result deleted"});
      } catch (error) {
-        re.json(error)
+        res.status(400).json(error)
      }
-    
 }

@@ -48,6 +48,8 @@
  *          
 *
 */
+
+
 /**
  * @swagger
  * /users/{firebaseId}:
@@ -71,6 +73,8 @@
  *          '404':
  *              description: user does not exist
  */
+
+
 /**
  * @swagger
  * /users/{id}:
@@ -105,6 +109,7 @@
  *                              $ref: '#/components/schemas/User' 
 */
 
+
 /**
  * @swagger
  * /users/search/{key}:
@@ -116,11 +121,13 @@
  *            schema:
  *              type: string
  *            required: true
+ *      produces: 
+ *          - application/json
  *      responses:
  *          '200':    
  *              description: all users with "key" in usernames
- *              content: 
- *                  application/json:
+//  *              content: 
+//  *                  application/json:
  *                      schema:
  *                          type: object
  *                          items:
