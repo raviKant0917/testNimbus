@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import Connection from './Database/db.js';
 import Router from './routes/route.js';
 import swaggerUi from 'swagger-ui-express';
-import swaggerJSDoc from 'swagger-jsdoc';
 import { specs } from './swagger/swagger.Json.js';
 
 mongoose.set('strictQuery', false);
