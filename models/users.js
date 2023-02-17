@@ -60,9 +60,13 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    linkedinId: {
+    linkedin: {
         type: String,
         maxLength : 255
+    },
+    github: {
+        type: String,
+        maxLength: 255
     }
 },{timestamps: true});
 

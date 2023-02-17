@@ -71,7 +71,9 @@ export const postUsers = async(req,res)=>{
         password,
         phoneNumber,
         instaId,
-        profileImage
+        profileImage,
+        linkedIn,
+        github
     } = req.body;
     try {
         const result = await User.findOne({email: email});
@@ -90,7 +92,9 @@ export const postUsers = async(req,res)=>{
             password: hashedPassword,
             instaId: instaId,
             profileImage: profileImage,
-            phoneNumber: phoneNumber
+            phoneNumber: phoneNumber,
+            linkedIn: linkedIn,
+            github: github
         })
         console.log(newUser);
         res.status(201).json({
