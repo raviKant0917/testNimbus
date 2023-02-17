@@ -54,6 +54,7 @@
  * @swagger
  * /users/{firebaseId}:
  *  get:
+ *      tags: ['Users']
  *      summary: Returns the user with given firebaseId
  *      parameters:
  *          - in: path
@@ -72,13 +73,14 @@
  *                              $ref: '#/components/schemas/User' 
  *          '404':
  *              description: user does not exist
- */
+*/
 
 
 /**
  * @swagger
  * /users/{id}:
  *  delete:
+ *      tags: ['Users']
  *      summary: update a user 
  *      parameters: 
  *          - in: path
@@ -91,12 +93,13 @@
  *              description: user was deleted 
  *          '500':
  *              description: something went wrong!
- */
+*/
 
 /**
  * @swagger
  * /users:
  *  get:
+ *      tags: ['Users']
  *      summary: Returns the list of all users
  *      responses:
  *          '200':    
@@ -113,7 +116,8 @@
 /**
  * @swagger
  * /users/search/{key}:
- *  get:
+ * get:
+ *      tags: ['Users']
  *      summary: searches all users with this key in usernames
  *      parameters:
  *          - in: path
@@ -126,21 +130,22 @@
  *      responses:
  *          '200':    
  *              description: all users with "key" in usernames
-//  *              content: 
-//  *                  application/json:
+ *              content: 
+ *                  application/json:
  *                      schema:
  *                          type: object
  *                          items:
  *                              $ref: '#/components/schemas/User' 
  *          '500':
  *              description: could not fetch data!
- */
+*/
 
 
 /**
  * @swagger
  * /users:
  *  post:
+ *      tags: ['Users']
  *      summary: creates a new user
  *      requestBody:
  *          required: true
@@ -161,12 +166,13 @@
  *                              $ref: '#/components/schemas/User' 
  *          '500':
  *              description: could not fetch data!
- */
+*/
 
 /**
  * @swagger
  * /users/{id}:
  *  patch:
+ *      tags: ['Users']
  *      summary: update a user 
  *      parameters: 
  *          - in: path
@@ -194,4 +200,4 @@
  *              description: could not fetch data!
  *          '404':
  *              description: user not found!
- */
+*/

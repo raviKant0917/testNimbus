@@ -3,15 +3,6 @@ import bcrypt from 'bcrypt';
 import { User } from "../models/users.js";
 
 
- 
-// //working..
-// /**
-//  * @swagger
-//  * /users:
-//  *  get:
-//  *      summary: Retrieve the list of all users
-//  *     
-// */
 export const getUsers = async(req,res)=>{
     try {
         const result = await User.find()
@@ -22,7 +13,7 @@ export const getUsers = async(req,res)=>{
         })
     } catch (e) {
         res.status(500).json({
-            message: "Something went wrong!"
+            message: "Something went wrong!" 
         })
     }
 }

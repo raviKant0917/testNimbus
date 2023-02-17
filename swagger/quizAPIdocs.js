@@ -67,6 +67,7 @@
  * @swagger
  * /questions:
  *  get:
+ *      tags: ["Quiz - questions"]
  *      summary: Returns the list of all questions
  *      responses:
  *          '200':    
@@ -84,6 +85,7 @@
  * @swagger
  * /questions:
  *  post:
+ *      tags: ["Quiz - questions"]
  *      summary: creates a new question
  *      requestBody:
  *          required: true
@@ -110,6 +112,7 @@
  * @swagger
  * /questions:
  *  delete:
+ *      tags: ["Quiz - questions"]
  *      summary: delete a question
  *      responses:
  *          '200':    
@@ -125,6 +128,7 @@
  * @swagger
  * /result:
  *  get:
+ *      tags: ["Quiz - results"]
  *      summary: Returns the list of all user's result
  *      responses:
  *          '200':    
@@ -141,6 +145,7 @@
  * @swagger
  * /result:
  *  post:
+ *      tags: ["Quiz - results"]
  *      summary: creates a new result
  *      requestBody:
  *          required: true
@@ -168,6 +173,7 @@
  * @swagger
  * /result:
  *  delete:
+ *      tags: ["Quiz - results"]
  *      summary: delete result
  *      responses:
  *          '200':    

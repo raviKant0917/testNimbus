@@ -36,6 +36,7 @@
  * @swagger
  * /posts:
  *  post:
+ *      tags: ['Posts']
  *      summary: creates a new post
  *      requestBody:
  *          required: true
@@ -62,6 +63,7 @@
  * @swagger
  * /posts:
  *  get:
+ *      tags: ['Posts']
  *      summary: returns all posts
  *      responses:
  *          '200':    
@@ -80,6 +82,7 @@
  * @swagger
  * /posts/{id}:
  *  patch:
+ *      tags: ['Posts']
  *      summary: update a user 
  *      parameters: 
  *          - in: path
@@ -113,6 +116,7 @@
  * @swagger
  * /users/{id}:
  *  delete:
+ *      tags: ['Posts']
  *      summary: delete a user 
  *      parameters: 
  *          - in: path
@@ -127,3 +131,78 @@
  *              description: something went wrong!
  */
 
+/**
+ * @swagger
+ * /posts/{id}/like:
+ *  put:
+ *      tags: ['Posts']
+ *      summary: creates a new user
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            type: string
+ *            required: true
+ *            description: id of the post    
+ *      requestBody:
+ *          required: true
+ *          content: 
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          id:
+ *                              type: string
+ *                              description: id of user who like/unlike the post
+ *                          
+ *      responses:
+ *          '201':    
+ *              description: all users with "key" in usernames
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          items:
+ *                              $ref: '#/components/schemas/User' 
+ *          '500':
+ *              description: could not fetch data!
+*/
+
+
+/**
+ * @swagger
+ * /posts/{id}/comment:
+ *  put:
+ *      tags: ['Posts']
+ *      summary: creates a new user
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            type: string
+ *            required: true
+ *            description: id of the post    
+ *      requestBody:
+ *          required: true
+ *          content: 
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          id:
+ *                              type: string
+ *                              description: id of user who like/unlike the post
+ *                          message: 
+ *                              type: string
+ *                              description: text of the comment
+ *                          
+ *      responses:
+ *          '201':    
+ *              description: all users with "key" in usernames
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          items:
+ *                              $ref: '#/components/schemas/User' 
+ *          '500':
+ *              description: could not fetch data!
+*/
