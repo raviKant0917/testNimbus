@@ -1,19 +1,28 @@
 import mongoose from "mongoose";
-const {ObjectId} = mongoose.Schema.Types
+const Schema = mongoose.Schema
+import { User } from "./users.js";
 const postSchema=new mongoose.Schema({
-    title:String,
-    description:String,
-    creator:String,
+    caption:String,
+    creator: { type: Schema.Types.ObjectId, ref: 'User' },
     photo:String,
+    isVideo:{
+        type:Boolean,
+        default:false
+    },
     likeCount:{
         type:Number,
         default:0
     },
+    likedbyMe:Boolean,
     likes:[{type:String,ref:"User"}],
     comments:[{
         text:String,
-        postedBy:{type:String,ref:"User"}
+        postedBy:{ type: Schema.Types.ObjectId, ref: 'User' }
     }],
+    commentCount:{
+        type:Number,
+        default:0
+    },
     createdAt:{
         type:Date,
         default:new Date()
