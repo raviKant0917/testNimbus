@@ -1,11 +1,16 @@
 import Postmodel from "../models/post.js";
 import router from "../routes/route.js";
-import { MongoClient, ObjectId } from "mongodb";
+// import { MongoClient, ObjectId } from "mongodb";
 
 //getting all posts
 export const getPost = async (req, res) => {
   try {
-    const postMessages = await Postmodel.find();
+    const postMessages = await Postmodel.find().populate('creator').populate({
+      path: 'comments',
+      populate: {
+        path: 'postedBy'
+      }
+    })
     // console.log(postMessages);
     res.status(200).json(postMessages);
   } catch (e) {
@@ -16,6 +21,8 @@ export const getPost = async (req, res) => {
 //creating a post
 export const createPost = async (req, res) => {
   const post = req.body;
+  // const isliked=post.likes.includes(post.user)
+  // post.likedByMe=isliked;
   const newPost = new Postmodel(post);
   try {
     await newPost.save();
@@ -92,12 +99,14 @@ export const likePost = async (req, res) => {
   }
 };
 
-// adding a comment
+// adding a comment 
 export const addComment = async (req, res) => {
   const id = req.params.id;
+
   const comment = {
-    text: req.body.message,
-    postedBy: req.body.id,
+    text: req.body.text,
+    postedBy:req.body.userId
+
   };
   try {
     await Postmodel.findByIdAndUpdate(
