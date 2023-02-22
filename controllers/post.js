@@ -69,7 +69,7 @@ export const likePost = async (req, res) => {
   if (!post) {
     res.status(501).json({ message: "post not found" });
   } else {
-    console.log(post);
+    // console.log(post);
 
     try {
       const liked = post.likes.includes(user);
@@ -102,7 +102,10 @@ export const likePost = async (req, res) => {
 // adding a comment 
 export const addComment = async (req, res) => {
   const id = req.params.id;
-
+  const post = await Postmodel.findById(id);
+  if(!post){
+    res.status(500).json({message:"post not found"})
+  }else{
   const comment = {
     text: req.body.text,
     postedBy:req.body.userId
@@ -115,6 +118,7 @@ export const addComment = async (req, res) => {
         $push: {
           comments: comment,
         },
+        commentCount:post.commentCount+1
       },
       {
         new: true,
@@ -126,4 +130,8 @@ export const addComment = async (req, res) => {
     console.log(e);
     res.status(501).json(e);
   }
+}
 };
+
+
+
