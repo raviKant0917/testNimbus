@@ -83,7 +83,7 @@ export const updatePost = async (req, res) => {
       new: true
     });
 
-    res.status(200).json(updatePost);
+    res.status(200).json({message:"post updated",updatedPost});
   } catch (e) {
     res.status(404).json({ message: e.message });
   }
