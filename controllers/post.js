@@ -33,7 +33,7 @@ export const getPost = async (req, res) => {
       .limit(limit);
 
     // res.status(200).json({postMessages,totalpages:totalPages,page:page});
-    res.status(200).json(postMessages);
+    res.status(200).json({totalPages:totalPages,currentPage:page,postMessages});
   } catch (e) {
     res.status(404).json({ message: e.message });
   }
