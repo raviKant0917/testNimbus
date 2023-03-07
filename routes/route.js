@@ -1,6 +1,7 @@
 import express from 'express';
 import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserById} from '../controllers/User-controller.js';
 import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd } from '../controllers/post.js';
+import { getMembers,getTeams,postMembers,postTeams } from '../controllers/teams.js';
 import * as controller from '../controllers/quizController.js'
 
 
@@ -24,6 +25,13 @@ router.put("/posts/:id/like",likePost);
 router.put("/posts/:id/comment",addComment);
 router.put("/posts/:id/comment/:commentId",deleteComment);
 router.get("/potd",getPotd); //Potd=post of the day
+
+//teams and members
+router.get("/teams",getTeams);
+router.get("/members",getMembers);
+
+router.post("/teams",postTeams);
+router.post("/members",postMembers);
 
 router.route('/questions')
 .get(controller.getQuestions)  //get request

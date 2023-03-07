@@ -74,13 +74,13 @@ export const createPost = async (req, res) => {
 
 // updating a post
 export const updatePost = async (req, res) => {
-  const id = req.params;
+  const id = req.params.id;
   // const post=await Postmodel.findById(id);
   const post = req.body;
 
   try {
-    const updatedPost = await Postmodel.findByIdAndUpdate({ _id: id }, post, {
-      new: true,
+    const updatedPost = await Postmodel.findByIdAndUpdate(id, post, {
+      new: true
     });
 
     res.status(200).json(updatePost);
