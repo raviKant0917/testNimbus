@@ -13,7 +13,10 @@ const postSchema=new mongoose.Schema({
         type:Number,
         default:0
     },
-    likedbyMe:Boolean,
+    likedbyMe:{
+        type:Boolean,
+        default: false
+    },
     likes:[{type:String,ref:"User"}],
     comments:[{
         text:String,

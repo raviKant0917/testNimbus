@@ -5,7 +5,7 @@
  *      postSchema:
  *          type: object
  *          properties:
- *           title:
+ *           caption:
  *            type: string
  *            description: caption of post
  *           creator:
@@ -19,6 +19,13 @@
  *            items: 
  *              type: string
  *            description: all options of question
+ *           likedByMe:
+ *              type: Boolean
+ *              default: false
+ *              description: whether user has liked post himself/herself. 
+ *           commentCount:
+ *              type: Number
+ *              description: number of comments on a post
  *           comments: 
  *            type: array
  *            items: 
@@ -43,9 +50,43 @@
  *          content: 
  *              application/json:
  *                  schema:
- *                      type: object
- *                      items: 
- *                          $ref: '#/components/schemas/postSchema'
+ *                          type: object
+ *                          properties:
+ *                              caption:
+ *                                  type: string
+ *                                  description: caption of post
+ *                              creator:
+ *                                  type: string
+ *                                  description: userId
+ *                              likeCount: 
+ *                                  type: string
+ *                                  description: number of likes on a particular post
+ *                              likes: 
+ *                                  type: array
+ *                                  items: 
+ *                                      type: string
+ *                                      description: ids of persons who liked the post
+ *                              likedByMe:
+ *                                  type: Boolean
+ *                                  default: false
+ *                                  description: whether user has liked post himself/herself. 
+ *                              commentCount:
+ *                                  type: Number
+ *                                  description: number of comments on a post
+ *                              comments: 
+ *                                  type: array
+ *                                  items: 
+ *                                      type: object
+ *                                      description: ids of users who commented
+ *                              createdAt:
+ *                                  type: Date
+ *                                  description: date of post created 
+ *                          example:
+ *                              caption: 6-march target to become potd,
+ *                              creator: 63e0fbe4e0521b80d5a72efb,
+ *                              photo: potdpotdpotdpotdpotd,
+ *                              isVideo: true                         
+ *
  *      responses:
  *          '201':    
  *              description: all users with "key" in usernames
@@ -65,6 +106,17 @@
  *  get:
  *      tags: ['Posts']
  *      summary: returns all posts
+ *      parameters:
+ *       - in: query
+ *         name: page
+ *         type: Number
+ *         default: 1
+ *         description: page number 
+ *       - in: query
+ *         name: limit
+ *         type: Number
+ *         default: 10
+ *         description: The numbers of posts in a page.
  *      responses:
  *          '200':    
  *              description: all users with "key" in usernames
@@ -72,8 +124,37 @@
  *                  application/json:
  *                      schema:
  *                          type: object
- *                          items:
- *                              $ref: '#/components/schemas/User' 
+ *                          properties:
+ *                              caption:
+ *                                  type: string
+ *                                  description: caption of post
+ *                              creator:
+ *                                  type: string
+ *                                  description: userId
+ *                              likeCount: 
+ *                                  type: string
+ *                                  description: number of likes on a particular post
+ *                              likes: 
+ *                                  type: array
+ *                                  items: 
+ *                                      type: string
+ *                                      description: ids of persons who liked the post
+ *                              likedByMe:
+ *                                  type: Boolean
+ *                                  default: false
+ *                                  description: whether user has liked post himself/herself. 
+ *                              commentCount:
+ *                                  type: Number
+ *                                  description: number of comments on a post
+ *                              comments: 
+ *                                  type: array
+ *                                  items: 
+ *                                      type: object
+ *                                      description: ids of users who commented
+ *                              createdAt:
+ *                                  type: Date
+ *                                  description: date of post created 
+ *               
  *          '500':
  *              description: could not fetch data!
  */
@@ -83,7 +164,7 @@
  * /posts/{id}:
  *  patch:
  *      tags: ['Posts']
- *      summary: update a user 
+ *      summary: update a post
  *      parameters: 
  *          - in: path
  *            name: id
@@ -114,10 +195,10 @@
 
 /**
  * @swagger
- * /users/{id}:
+ * /posts/{id}:
  *  delete:
  *      tags: ['Posts']
- *      summary: delete a user 
+ *      summary: delete a post
  *      parameters: 
  *          - in: path
  *            name: id
@@ -136,7 +217,7 @@
  * /posts/{id}/like:
  *  put:
  *      tags: ['Posts']
- *      summary: creates a new user
+ *      summary: creates a new post
  *      parameters:
  *          - in: path
  *            name: id
@@ -173,7 +254,7 @@
  * /posts/{id}/comment:
  *  put:
  *      tags: ['Posts']
- *      summary: creates a new user
+ *      summary: creates a new post
  *      parameters:
  *          - in: path
  *            name: id
@@ -187,12 +268,46 @@
  *                  schema:
  *                      type: object
  *                      properties:
- *                          id:
+ *                          userId:
  *                              type: string
  *                              description: id of user who like/unlike the post
- *                          message: 
+ *                          text: 
  *                              type: string
  *                              description: text of the comment
+ *                          
+ *      responses:
+ *          '201':    
+ *              description: all users with "key" in usernames
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          items:
+ *                              $ref: '#/components/schemas/User' 
+ *          '500':
+ *              description: could not fetch data!
+*/
+
+
+//delete a comment
+
+/**
+ * @swagger
+ * /posts/{id}/comment/{commentId}:
+ *  delete:
+ *      tags: ['Posts']
+ *      summary: deletes a comment
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            type: string
+ *            required: true
+ *            description: id of the post 
+ *          - in: path
+ *            name: commentId
+ *            type: string
+ *            required: true
+ *            description: id of comment to be deleted 
  *                          
  *      responses:
  *          '201':    
