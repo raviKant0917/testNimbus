@@ -188,6 +188,7 @@
  *                          fullName: Narendra Uchiha
  *                          userName: Hinata
  *                          email: gokuchauhan@yadav.com
+ *                          profileImage: https://imgflip.com/s/meme/Depression-Dog.jpg
  *                          phoneNumer: 8765432130
  *                          instaId: __puneetke_Deewane
  *                          linkedIn: https://www.linkedin.com/in/sdlkjfsl;djfklsdj/
