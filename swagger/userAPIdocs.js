@@ -81,10 +81,36 @@
 
 /**
  * @swagger
+ * /users/search/{key}:
+ *  get:
+ *      tags: ['Users']
+ *      summary: Returns users with given username in key
+ *      parameters:
+ *          - in: path
+ *            name: key
+ *            schema:
+ *              type: string
+ *            required: true
+ *      responses:
+ *          '200':    
+ *              description: A single user
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          items:
+ *                              $ref: '#/components/schemas/User' 
+ *          '404':
+ *              description: user does not exist
+*/
+
+
+/**
+ * @swagger
  * /users/{id}:
  *  delete:
  *      tags: ['Users']
- *      summary: update a user 
+ *      summary: delete a user 
  *      parameters: 
  *          - in: path
  *            name: id
@@ -113,34 +139,6 @@
  *                          type: object
  *                          items:
  *                              $ref: '#/components/schemas/User' 
-*/
-
-
-/**
- * @swagger
- * /users/search/{key}:
- * get:
- *      tags: ['Users']
- *      summary: searches all users with this key in usernames
- *      parameters:
- *          - in: path
- *            name: key
- *            schema:
- *              type: string
- *            required: true
- *      produces: 
- *          - application/json
- *      responses:
- *          '200':    
- *              description: all users with "key" in usernames
- *              content: 
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          items:
- *                              $ref: '#/components/schemas/User' 
- *          '500':
- *              description: could not fetch data!
 */
 
 
