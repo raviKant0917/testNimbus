@@ -12,9 +12,7 @@ const memberSchema= new mongoose.Schema({
     position:{
         type:String
     },
-    image:{
-        type:String
-    }
+    image:String
 })
 
 const member_model=new mongoose.model("member",memberSchema);
