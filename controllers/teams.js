@@ -5,9 +5,9 @@ import team_model from "../models/teams.js";
 
 export const getMembers = async (request, response) => {
     try {
-        const{page=1,limit=5}=request.query;
+        // const{page=1,limit=5}=request.query;
 
-        const members=await member_model.find({}).limit(limit*1).skip((page-1)*limit);
+        const members=await member_model.find();
         response.status(200).json(members);
        
     } catch (error) {
@@ -17,12 +17,12 @@ export const getMembers = async (request, response) => {
 
 export const getTeams = async (request, response) => {
     try {
-        const{page=1,limit=5}=request.query;
-        const teams=await team_model.find({}).limit(limit*1).skip((page-1)*limit);
+        // const{page=1,limit=5}=request.query;
+        const teams=await team_model.find();
         response.status(200).json(teams);
        
     } catch (error) {
-        response.status(500).send(e);
+        response.status(500).json(e);
     }
 }
 
