@@ -167,6 +167,7 @@
  *      summary: update a post
  *      parameters: 
  *          - in: path
+ *            description: id of post
  *            name: id
  *            type: string
  *            required: true
@@ -200,16 +201,16 @@
  *      tags: ['Posts']
  *      summary: delete a post
  *      parameters: 
- *          - in: path
- *            name: id
- *            type: string
- *            required: true
- *            description: string id of user to delete
+ *          - in: path 
+ *            name: id 
+ *            type: string 
+ *            required: true 
+ *            description: string id of post to delete 
  *      responses:
  *          '202':    
  *              description: user was deleted 
  *          '500':
- *              description: something went wrong!
+ *              description: something went wrong! 
  */
 
 /**
