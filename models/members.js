@@ -12,8 +12,11 @@ const memberSchema= new mongoose.Schema({
     position:{
         type:String
     },
-    image:String
+    image:{
+        type:String
+    }
 })
 
 const member_model=new mongoose.model("member",memberSchema);
+
 export default member_model;
