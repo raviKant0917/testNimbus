@@ -17,36 +17,36 @@
  *            description: name of member
  *           images:
  *            type: string
- *            description:      
+ *            description: direct url of image
  *           
 *
 */
 
 /**
  * @swagger
- * /teams:
+ * /members:
  *  get:
- *      tags: ['teams']
- *      summary: return all teams
+ *      tags: ['members']
+ *      summary: return all members
  *      responses:
  *          '200':    
- *              description: returns all teams
+ *              description: returns all members
  *              content: 
  *                  application/json:
  *                      schema:
  *                          type: object
  *                          items: 
- *                              $ref: '#/components/schemas/User'
+ *                              $ref: '#/components/schemas/members'
  *          '500':
- *              description: 
+ *              description: internal server erorr
 */
 
 /**
  * @swagger
- * /teams:
+ * /members:
  *  post:
- *      tags: ['teams']
- *      summary: creates a new team
+ *      tags: ['members']
+ *      summary: post a new member
  *      requestBody:
  *          required: true
  *          content: 
@@ -58,15 +58,20 @@
  *                              type: string
  *                              description: name of the Team
  *                              required: true    
+ *                          member_name:
+ *                              type: string
+ *                              description: member name
+ *                              required: true
  *                          images:
  *                              type: string
- *                              description: image url
+ *                              description:
  *                      example:
  *                          team_name: AppTeam  
- *                          images: https://www.dictionary.com/e/wp-content/uploads/2021/09/20210922_atw_memeStonk_800x800-300x300.png
+ *                          member_name: JATIN
+ *                          images: https://cdn.vox-cdn.com/thumbor/8CIbT8aMgmLzG6vTzbWil2LwdWk=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19938259/3zlqxf_copy.jpg
  *      responses:
  *          '200':    
- *              description: all users with "key" in usernames
+ *              description: returns all members
  *              content: 
  *                  application/json:
  *                      schema:
