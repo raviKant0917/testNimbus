@@ -2,6 +2,7 @@ import express from 'express';
 import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserById} from '../controllers/User-controller.js';
 import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd } from '../controllers/post.js';
 import { getMembers,getTeams,postMembers,postTeams } from '../controllers/teams.js';
+import { getEvents,postEvents } from '../controllers/eventControllers.js';
 import * as controller from '../controllers/quizController.js'
 
 
@@ -32,6 +33,10 @@ router.get("/members",getMembers);
 
 router.post("/teams",postTeams);
 router.post("/members",postMembers);
+//events 
+router.get("/events",getEvents);
+router.post("/events",getEvents);
+
 
 router.route('/questions')
 .get(controller.getQuestions)  //get request
