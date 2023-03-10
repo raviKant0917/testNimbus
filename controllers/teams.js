@@ -4,6 +4,7 @@ import team_model from "../models/teams.js";
 
 // import { ObjectId } from 'mongodb';
 import { ObjectId } from "bson";
+import resultSchema from "../models/resultSchema.js";
 
 export const getMembers = async (request, response) => {
   try {
@@ -88,3 +89,16 @@ export const getTeamMembers = async (req, res) => {
     res.status(500).json(e);
   }
 };
+
+export const updateMember=async(req,res)=>{
+    const change=req.body;
+    const id=req.params.id;
+    try{
+        const updatedMember=await member_model.findByIdAndUpdate(id,change);
+        res.status(200).json(updatedMember);
+
+    }catch(e){
+        console.log(e)
+        res.status(500).json(e);
+    }
+}
