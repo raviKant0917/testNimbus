@@ -94,7 +94,7 @@ export const updateMember=async(req,res)=>{
     const change=req.body;
     const id=req.params.id;
     try{
-        const updatedMember=await member_model.findByIdAndUpdate(id,change);
+        const updatedMember=await member_model.findByIdAndUpdate(id,change,{new: true});
         res.status(200).json(updatedMember);
 
     }catch(e){

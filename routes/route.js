@@ -29,9 +29,9 @@ router.get("/potd",getPotd); //Potd=post of the day
 
 //teams and members
 router.get("/teams",getTeams);
+router.get("/teams/:id",getTeamMembers);
 router.post("/teams",postTeams);
 
-router.get("/teams/:id",getTeamMembers);
 router.get("/members",getMembers);
 router.post("/members",postMembers);
 router.patch("/members/:id",updateMember);
