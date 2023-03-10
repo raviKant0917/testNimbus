@@ -11,7 +11,7 @@ export const getMembers = async (request, response) => {
         response.status(200).json(members);
        
     } catch (error) {
-        response.status(500).send(e);
+        response.status(500).send(error);
     }
 }
 
@@ -22,7 +22,7 @@ export const getTeams = async (request, response) => {
         response.status(200).json(teams);
        
     } catch (error) {
-        response.status(500).json(e);
+        response.status(500).json(error);
     }
 }
 
