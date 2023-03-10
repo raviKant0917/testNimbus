@@ -9,13 +9,15 @@ export const getEvents = async (request, response) => {
     response.status(500).send(error);
   }
 };
+
+
 export const postEvents = async (request, response) => {
-  const event = req.body;
-  const newEvent = new event(event);
+  const eventToEnter = request.body;
+  const newEvent = new event(eventToEnter);
 
   try {
-    await newPost.save();
-    res.status(201).json(newEvent);
+    await newEvent.save();
+    response.status(201).json({message:"event added",newEvent});
   } catch (error) {
     response.status(500).json(error);
   }

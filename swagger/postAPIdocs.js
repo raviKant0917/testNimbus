@@ -322,3 +322,21 @@
  *          '500':
  *              description: could not fetch data!
 */
+
+
+/**
+ * @swagger
+ * /potd:
+ *  get:
+ *      tags: ['Posts']
+ *      summary: returns post of the day
+ *      responses:
+ *          '200':    
+ *              description: all users with "key" in usernames
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *          '500':
+ *              description: could not fetch data!
+ */
