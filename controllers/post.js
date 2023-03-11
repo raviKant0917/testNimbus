@@ -240,7 +240,8 @@ export const getPostsOfUser = async (req, res) => {
         populate: {
           path: "postedBy",
         },
-      });
+      })
+      .sort({ createdAt: -1 });
     res.status(200).json(posts);
   } catch (e) {
     console.log(e);
