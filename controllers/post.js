@@ -5,7 +5,7 @@ import router from "../routes/route.js";
 //getting all posts
 export const getPost = async (req, res) => {
   let page = Number(req.query.page) || 1;
-  let limit = Number(req.query.limit) || 1;
+  let limit = Number(req.query.limit) || 5;
   const total = await Postmodel.find().count();
   // console.log(total)
   let totalPages;
@@ -21,7 +21,7 @@ export const getPost = async (req, res) => {
 
   try {
     const postMessages = await Postmodel.find()
-      .sort({ createdAt: 1 })
+      .sort({ createdAt: -1 })
       .populate("creator")
       .populate({
         path: "comments",
