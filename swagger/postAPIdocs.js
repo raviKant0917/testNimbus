@@ -374,3 +374,58 @@
  *          '500':
  *              description: could not fetch data!
  */
+
+/**
+ * @swagger
+ * /{userId}/posts:
+ *  get:
+ *      tags: ['Posts']
+ *      summary: returns all posts of a particular user
+ *      parameters:
+ *          - in: path
+ *            name: userId
+ *            type: string
+ *            required: true
+ *            description: id of the user 
+ *      responses:
+ *          '200':    
+ *              description: all posts with "key" in usernames
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                                  
+ *                              caption:
+ *                                  type: string
+ *                                  description: caption of post
+ *                              creator:
+ *                                  type: string
+ *                                  description: userId
+ *                              likeCount: 
+ *                                  type: string
+ *                                  description: number of likes on a particular post
+ *                              likes: 
+ *                                  type: array
+ *                                  items: 
+ *                                      type: string
+ *                                      description: ids of persons who liked the post
+ *                              likedByMe:
+ *                                  type: Boolean
+ *                                  default: false
+ *                                  description: whether user has liked post himself/herself. 
+ *                              commentCount:
+ *                                  type: Number
+ *                                  description: number of comments on a post
+ *                              comments: 
+ *                                  type: array
+ *                                  items: 
+ *                                      type: object
+ *                                      description: ids of users who commented
+ *                              createdAt:
+ *                                  type: Date
+ *                                  description: date of post created 
+ *               
+ *          '500':
+ *              description: could not fetch data!
+ */
