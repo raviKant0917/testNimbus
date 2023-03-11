@@ -190,7 +190,7 @@
  *                          email: gokuchauhan@yadav.com
  *                          password: string
  *                          profileImage: https://imgflip.com/s/meme/Depression-Dog.jpg
- *                          phoneNumer: 8765432130
+ *                          phoneNumber: 8765432130
  *                          instaId: __puneetke_Deewane
  *                          linkedIn: https://www.linkedin.com/in/sdlkjfsl;djfklsdj/
  *                          github: https://github.com/heavycoder    

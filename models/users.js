@@ -54,7 +54,8 @@ const userSchema = new mongoose.Schema({
     },
     profileImage: {
         type: String,
-        maxLength: 255
+        maxLength: 255,
+        required: true
     },
     totalScore: {
         type: Number,
