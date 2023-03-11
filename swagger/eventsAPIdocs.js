@@ -61,24 +61,14 @@
  *          content: 
  *              application/json:
  *                  schema:
- *                          type: object
- *                          properties:
- *                              name:
- *                                  type: string
- *                                  description: name of event
- *                              startDate:
- *                                  type: string
- *                                  description: startDate and time of event
- *                              endDate: 
- *                                  type: string
- *                                  description: endDate and time of event
- *                              info: 
- *                                  type: string
- *                                  description: info about event 
+ *                         
  *                          example:
  *                              name: HacknHills,
  *                              startDate: 2023-02-06T13:08:52,
  *                              endDate: 2023-03-10T00:36:08,
+ *                              venue: OAT
+ *                              regUrl: www.google.com
+ *                              image: sdslfxdfgdgfhcffghgdf
  *                              info: Hacked hIlls
  *                              isWorkshop: true                         
  *
