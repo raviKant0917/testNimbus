@@ -15,7 +15,7 @@
  *           member_name:
  *            type: string
  *            description: name of member
- *           images:
+ *           image:
  *            type: string
  *            description: direct url of image
  *           
@@ -54,6 +54,9 @@
  *                  schema:
  *                      type: object
  *                      properties:
+ *                          teamId:
+ *                              type: string
+ *                              description: id of the team
  *                          team_name:
  *                              type: string
  *                              description: name of the Team
@@ -62,13 +65,17 @@
  *                              type: string
  *                              description: member name
  *                              required: true
- *                          images:
+ *                          image:
  *                              type: string
  *                              description:
+ *                          position: 
+ *                              type: string
+ *                              description: position in the respective club
  *                      example:
- *                          team_name: AppTeam  
+ *                          teamId: 640788814470496094b3a488 
  *                          member_name: JATIN
- *                          images: https://cdn.vox-cdn.com/thumbor/8CIbT8aMgmLzG6vTzbWil2LwdWk=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19938259/3zlqxf_copy.jpg
+ *                          position: Core Coordinator
+ *                          image: https://cdn.vox-cdn.com/thumbor/8CIbT8aMgmLzG6vTzbWil2LwdWk=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19938259/3zlqxf_copy.jpg
  *      responses:
  *          '200':    
  *              description: returns all members
@@ -77,10 +84,86 @@
  *                      schema:
  *                          type: object
  *                          items:
- *                              $ref: '#/components/schemas/User' 
+ *                              $ref: '#/components/schemas/members' 
  *          '500':
  *              description: could not fetch data!
  *      
+*/
+
+
+/**
+ * @swagger
+ * /teams/{id}:
+ *  get:
+ *      tags: ['members']
+ *      summary: Returns all members with given team id
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: id of a team
+ *            schema:
+ *              type: string
+ *            required: true
+ *      responses:
+ *          '200':    
+ *              description: request was successful
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object' 
+ *          '404':
+ *              description: user does not exist
+*/
+
+
+/**
+ * @swagger
+ * /members/{id}:
+ *  patch:
+ *      tags: ['members']
+ *      summary: update a member 
+ *      parameters: 
+ *          - in: path
+ *            name: id
+ *            description: id of the member
+ *            type: string
+ *            required: true
+ *      requestBody:
+ *          required: true
+ *          content: 
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      properties:
+ *                          teamId:
+ *                              type: string
+ *                              description: id of the team
+ *                          member_name:
+ *                              type: string
+ *                              description: member name
+ *                              required: true
+ *                          image:
+ *                              type: string
+ *                              description:
+ *                          position: 
+ *                              type: string
+ *                              description: position in the respective club
+ *                      example:
+ *                          teamId: 640788814470496094b3a488 
+ *                          member_name: JATIN
+ *                          position: Core Coordinator
+ *                          image: https://cdn.vox-cdn.com/thumbor/8CIbT8aMgmLzG6vTzbWil2LwdWk=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19938259/3zlqxf_copy.jpg
+
+ *                          
+ *      responses:
+ *          '200':    
+ *              description: member upadted
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *          '500':
+ *              description: could not fetch data!
 */
 
 

@@ -1,7 +1,7 @@
 import express from 'express';
 import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserById} from '../controllers/User-controller.js';
 import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd } from '../controllers/post.js';
-import { getMembers,getTeams,postMembers,postTeams } from '../controllers/teams.js';
+import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember} from '../controllers/teams.js';
 import { getEvents,postEvents } from '../controllers/eventControllers.js';
 import * as controller from '../controllers/quizController.js'
 
@@ -29,13 +29,16 @@ router.get("/potd",getPotd); //Potd=post of the day
 
 //teams and members
 router.get("/teams",getTeams);
-router.get("/members",getMembers);
-
+router.get("/teams/:id",getTeamMembers);
 router.post("/teams",postTeams);
+
+router.get("/members",getMembers);
 router.post("/members",postMembers);
+router.patch("/members/:id",updateMember);
+
 //events 
 router.get("/events",getEvents);
-router.post("/events",getEvents);
+router.post("/events",postEvents);
 
 
 router.route('/questions')

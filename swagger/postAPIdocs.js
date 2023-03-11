@@ -125,6 +125,7 @@
  *                      schema:
  *                          type: object
  *                          properties:
+ *                                  
  *                              caption:
  *                                  type: string
  *                                  description: caption of post
@@ -177,8 +178,41 @@
  *              application/json:
  *                  schema:
  *                      type: object
- *                      items: 
- *                          $ref: '#/components/schemas/postSchema'
+ *                      properties:
+ *                          caption:
+ *                           type: string
+ *                           description: caption of post
+ *                          creator:
+ *                           type: string
+ *                           description: userId
+ *                          likeCount: 
+ *                           type: string
+ *                           description: number of likes on a particular post
+ *                          likes: 
+ *                           type: array
+ *                           items: 
+ *                               type: string
+ *                               description: ids of persons who liked the post
+ *                          likedByMe:
+ *                           type: Boolean
+ *                           default: false
+ *                           description: whether user has liked post himself/herself. 
+ *                          commentCount:
+ *                           type: Number
+ *                           description: number of comments on a post
+ *                          comments: 
+ *                           type: array
+ *                           items: 
+ *                               type: object
+ *                               description: ids of users who commented
+ *                          createdAt:
+ *                           type: Date
+ *                           description: date of post created 
+ *                          example:
+ *                              caption: 6-march target to become potd,
+ *                              creator: 63e0fbe4e0521b80d5a72efb,
+ *                              photo: potdpotdpotdpotdpotd,
+ *                              isVideo: true                         
  *      responses:
  *          '202':    
  *              description: all users with "key" in usernames
@@ -218,7 +252,7 @@
  * /posts/{id}/like:
  *  put:
  *      tags: ['Posts']
- *      summary: creates a new post
+ *      summary: like/unlike a post with given post Id
  *      parameters:
  *          - in: path
  *            name: id
@@ -255,7 +289,7 @@
  * /posts/{id}/comment:
  *  put:
  *      tags: ['Posts']
- *      summary: creates a new post
+ *      summary: comment on a post
  *      parameters:
  *          - in: path
  *            name: id
@@ -322,3 +356,21 @@
  *          '500':
  *              description: could not fetch data!
 */
+
+
+/**
+ * @swagger
+ * /potd:
+ *  get:
+ *      tags: ['Posts']
+ *      summary: returns post of the day
+ *      responses:
+ *          '200':    
+ *              description: all users with "key" in usernames
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *          '500':
+ *              description: could not fetch data!
+ */

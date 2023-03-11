@@ -5,9 +5,13 @@ const eventSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    startDate:Date,
-    endDate:Date,
-    venue:String,
+    startDate:{
+        type:Date
+    },
+    endDate:{
+        type:Date
+    },
+    venue:{String},
     info:{
         type:String
     },
@@ -16,6 +20,10 @@ const eventSchema=new mongoose.Schema({
     },
     regUrl:{
         String
+    },
+    isWorkshop:{
+        type:Boolean,
+        default:false
     }
 })
 

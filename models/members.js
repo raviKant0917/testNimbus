@@ -1,22 +1,32 @@
 import mongoose from "mongoose";
+import { model,Schema } from 'mongoose';
 
-const memberSchema= new mongoose.Schema({
-    member_name:{
-        type:String,
-        required:true
-        },
-    team_name:{
-        type:String,
-        required:true
-    },
-    position:{
-        type:String
-    },
-    image:{
-        type:String
-    }
-})
+// import { ObjectId } from "mongoose";
+// import {team_model} from "./teams.js";
 
-const member_model=new mongoose.model("member",memberSchema);
+
+
+const memberSchema = new mongoose.Schema({
+  member_name: {
+    type: String,
+    required: true,
+  },
+  team_name: {
+    type: String,
+  },
+  teamId: {
+    type:String
+    // type: mongoose.Schema.Types.ObjectId,
+    // ref: 'team_model'
+  },
+  position: {
+    type: String,
+  },
+  image: {
+    type: String,
+  },
+});
+
+const member_model = new mongoose.model("member", memberSchema);
 
 export default member_model;
