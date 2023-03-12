@@ -66,14 +66,9 @@
  *                              name: HacknHills,
  *                              startDate: 2023-02-06T13:08:52,
  *                              endDate: 2023-03-10T00:36:08,
-<<<<<<< HEAD
- *                              venue: Computer Center
- *                              
-=======
  *                              venue: OAT
  *                              regUrl: www.google.com
  *                              image: sdslfxdfgdgfhcffghgdf
->>>>>>> 4e759bf6ca4ad2238aff8d582d22349e3f5b866a
  *                              info: Hacked hIlls
  *                              isWorkshop: true                         
  *
