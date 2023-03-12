@@ -81,6 +81,32 @@
 
 /**
  * @swagger
+ * /users/exist/{email}:
+ *  get:
+ *      tags: ['Users']
+ *      summary: checks if user with given user exists or not
+ *      parameters:
+ *          - in: path
+ *            name: email
+ *            schema:
+ *              type: string
+ *            required: true
+ *      responses:
+ *          '200':    
+ *              description: successfully executed.
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          items:
+ *                              $ref: '#/components/schemas/User' 
+ *          '500':
+ *              description: something went wrong
+*/
+
+
+/**
+ * @swagger
  * /users/search/{key}:
  *  get:
  *      tags: ['Users']
