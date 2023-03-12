@@ -6,7 +6,21 @@ const teamSchema= new mongoose.Schema({
         required:true,
         unique:true
     },
-    image:String
+    image:{
+        type:String
+    },
+    secretary:{
+        type:String
+    },
+    convenor:{
+        type:String
+    },
+    instagram:{
+        type:String
+    },
+    linkedIn:{
+        type:String
+    }
 })
 
 const team_model=new mongoose.model("team",teamSchema);
