@@ -329,7 +329,7 @@
 /**
  * @swagger
  * /posts/{id}/comment/{commentId}:
- *  delete:
+ *  put:
  *      tags: ['Posts']
  *      summary: deletes a comment
  *      parameters:
