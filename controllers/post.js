@@ -5,23 +5,23 @@ import router from "../routes/route.js";
 //getting all posts
 export const getPost = async (req, res) => {
   let page = Number(req.query.page) || 1;
-  let limit = Number(req.query.limit) || 1;
-  const total=await Postmodel.find().count();
+  let limit = Number(req.query.limit) || 5;
+  const total = await Postmodel.find().count();
   // console.log(total)
   let totalPages;
-  if(total%limit==0){
-    totalPages=total/limit;
-  }else{
-    totalPages=Math.floor(total/limit)+1;
+  if (total % limit == 0) {
+    totalPages = total / limit;
+  } else {
+    totalPages = Math.floor(total / limit) + 1;
   }
-  if(page>totalPages){
-     page=totalPages;
+  if (page > totalPages) {
+    page = totalPages;
   }
   let skip = (page - 1) * limit;
 
   try {
     const postMessages = await Postmodel.find()
-      .sort({ createdAt: 1 })
+      .sort({ createdAt: -1 })
       .populate("creator")
       .populate({
         path: "comments",
@@ -33,7 +33,9 @@ export const getPost = async (req, res) => {
       .limit(limit);
 
     // res.status(200).json({postMessages,totalpages:totalPages,page:page});
-    res.status(200).json({totalPages:totalPages,currentPage:page,postMessages});
+    res
+      .status(200)
+      .json({ totalPages: totalPages, currentPage: page, postMessages });
   } catch (e) {
     res.status(404).json({ message: e.message });
   }
@@ -41,7 +43,7 @@ export const getPost = async (req, res) => {
 
 //getting a specific post by id
 export const getAPost = async (req, res) => {
-  const id = req.params.id;
+  const id = req.params.postId;
   try {
     const postMessages = await Postmodel.findById(id)
       .populate("creator")
@@ -80,10 +82,10 @@ export const updatePost = async (req, res) => {
 
   try {
     const updatedPost = await Postmodel.findByIdAndUpdate(id, post, {
-      new: true
+      new: true,
     });
 
-    res.status(200).json({message:"post updated",updatedPost});
+    res.status(200).json({ message: "post updated", updatedPost });
   } catch (e) {
     res.status(404).json({ message: e.message });
   }
@@ -225,4 +227,24 @@ export const getPotd = async (req, res) => {
     }
   });
   res.status(200).json(potd);
+};
+
+//get all Posts of a particular user
+export const getPostsOfUser = async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const posts = await Postmodel.find({ creator: userId })
+      .populate("creator")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "postedBy",
+        },
+      })
+      .sort({ createdAt: -1 });
+    res.status(200).json(posts);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json(e);
+  }
 };
