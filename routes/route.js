@@ -1,6 +1,6 @@
 import express from 'express';
 import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserByFirebaseId} from '../controllers/User-controller.js';
-import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd } from '../controllers/post.js';
+import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd,getPostsOfUser } from '../controllers/post.js';
 import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember} from '../controllers/teams.js';
 import { getEvents,postEvents } from '../controllers/eventControllers.js';
 import * as controller from '../controllers/quizController.js'
@@ -31,7 +31,7 @@ router.delete("posts/:id",deletePost);
 router.put("/posts/:id/like",likePost);
 router.put("/posts/:id/comment",addComment);
 router.put("/posts/:id/comment/:commentId",deleteComment);
-router.get("/:userId/posts",getPostsOfUser); 
+router.get("/:userId/posts", getPostsOfUser); 
 router.get("/potd",getPotd); //Potd=post of the day
 
 //teams and members
