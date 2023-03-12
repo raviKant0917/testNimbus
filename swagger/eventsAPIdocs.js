@@ -79,6 +79,8 @@
  *                              name: HacknHills,
  *                              startDate: 2023-02-06T13:08:52,
  *                              endDate: 2023-03-10T00:36:08,
+ *                              venue: Computer Center
+ *                              
  *                              info: Hacked hIlls
  *                              isWorkshop: true                         
  *

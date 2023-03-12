@@ -4,19 +4,25 @@ import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComm
 import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember} from '../controllers/teams.js';
 import { getEvents,postEvents } from '../controllers/eventControllers.js';
 import * as controller from '../controllers/quizController.js'
+import { getRooms,joinRoom, leaveRoom} from '../controllers/omegle.js';
 
 
 const router =express.Router(); 
 
+//users
 router.get("/users/:id",getUserById);
 router.get("/users/search/:key",getUsersByName);
 router.get('/users',getUsers);
-
 router.post("/users",postUsers);
-
 router.patch("/users/:id",patchUser);
 router.delete("/users/:id",deleteUser);
 
+//omegle
+router.get("/room",getRooms);
+router.post("/room/:userId",joinRoom);
+router.post("/room/leave/:userId",leaveRoom);
+
+//posts
 router.post("/posts",createPost);
 router.get("/posts",getPost);
 router.get("/posts/:id",getAPost);
