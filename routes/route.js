@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserById} from '../controllers/User-controller.js';
+import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserByFirebaseId} from '../controllers/User-controller.js';
 import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd,getPostsOfUser } from '../controllers/post.js';
 import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember} from '../controllers/teams.js';
 import { getEvents,postEvents } from '../controllers/eventControllers.js';
@@ -10,7 +10,7 @@ import { getRooms,joinRoom, leaveRoom} from '../controllers/omegle.js';
 const router =express.Router(); 
 
 //users
-router.get("/users/:id",getUserById);
+router.get("/users/:firebaseid",getUserByFirebaseId);
 router.get("/users/search/:key",getUsersByName);
 router.get('/users',getUsers);
 router.post("/users",postUsers);

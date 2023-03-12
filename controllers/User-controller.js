@@ -43,10 +43,11 @@ export const getUsersByName = async(req,res)=>{
     }
 }
 
-export const getUserById = async(req,res)=>{
-    const id = req.params.id;
+export const getUserByFirebaseId = async(req,res)=>{
+    const firebaseid = req.params.firebaseid;
+    console.log(firebaseid);
     try {
-        const result = await User.findById(id);
+        const result = await User.find({firebaseId: firebaseid}).exec();
         if(!result){
             return res.status(404).json({
                 message: "User does not exists"
