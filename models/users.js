@@ -64,9 +64,9 @@ const userSchema = new mongoose.Schema(
             type: Number,
             default: 0,
         },
-        linkedin: {
-            default: "",
+        linkedIn: {
             type: String,
+            default: "",
             maxLength: 255,
             required: true,
         },
