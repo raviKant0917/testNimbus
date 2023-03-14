@@ -260,6 +260,7 @@
  *                          instaId: __puneetke_Deewane
  *                          linkedIn: https://www.linkedin.com/in/sdlkjfsl;djfklsdj/
  *                          github: https://github.com/heavycode
+ *                          profileImage: https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png
  *                          
  *      responses:
  *          '202':    
