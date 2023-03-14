@@ -81,6 +81,32 @@
 
 /**
  * @swagger
+ * /users/exist/{email}:
+ *  get:
+ *      tags: ['Users']
+ *      summary: checks if user with given user exists or not
+ *      parameters:
+ *          - in: path
+ *            name: email
+ *            schema:
+ *              type: string
+ *            required: true
+ *      responses:
+ *          '200':    
+ *              description: successfully executed.
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          items:
+ *                              $ref: '#/components/schemas/User' 
+ *          '500':
+ *              description: something went wrong
+*/
+
+
+/**
+ * @swagger
  * /users/search/{key}:
  *  get:
  *      tags: ['Users']
@@ -234,6 +260,7 @@
  *                          instaId: __puneetke_Deewane
  *                          linkedIn: https://www.linkedin.com/in/sdlkjfsl;djfklsdj/
  *                          github: https://github.com/heavycode
+ *                          profileImage: https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png
  *                          
  *      responses:
  *          '202':    

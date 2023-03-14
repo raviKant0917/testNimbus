@@ -66,6 +66,31 @@ export const getUserByFirebaseId = async(req,res)=>{
     }
 }
 
+export const checkIfUserExist = async( req, res) => {
+    const email = req.params.email;
+    try {
+        const result = await User.findOne({email: email});
+        if(result){
+            res.status(200).json({
+                success: 'true',
+                userFound: 'true',
+                user: result
+            })
+        }else{
+            res.status(200).json({
+                success: "true",
+                userFound: "false"
+            });
+        }
+    } catch (err) {
+        res.status(500).json({
+            success: 'failed',
+            message: "something went wrong",
+            error: err.message
+        })
+    }
+}
+
 export const postUsers = async(req,res)=>{
     console.log(req.body);
     const {
