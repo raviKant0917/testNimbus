@@ -13,9 +13,8 @@ export const getMembers = async (request, response) => {
     const members = await member_model.find();
     response.status(200).json(members);
   } catch (error) {
-    console.log(error)
+    console.log(error);
     response.status(500).send(error);
-   
   }
 };
 
@@ -31,18 +30,18 @@ export const getTeams = async (request, response) => {
 
 export const postMembers = async (request, response) => {
   const member = request.body;
-  const teamId=member.teamId;
+  const teamId = member.teamId;
   try {
-    const team=await team_model.findById(teamId);
+    const team = await team_model.findById(teamId);
     console.log(team);
     const user = new member_model({
-        member_name:member.member_name,
-        team_name:team.team_name,
-        teamId:teamId,
-        position:member.position,
-        image:member.image
+      member_name: member.member_name,
+      team_name: team.team_name,
+      teamId: teamId,
+      position: member.position,
+      image: member.image,
     });
-    
+
     await user.save((err) => {
       if (err) {
         response.send(err);
@@ -76,12 +75,10 @@ export const postTeams = async (request, response) => {
 
 export const getTeamMembers = async (req, res) => {
   const id = req.params.id;
-//   const objectId = new ObjectId(id);
+  //   const objectId = new ObjectId(id);
 
   try {
-
-    const teamMembers = await member_model
-      .find({teamId:id})
+    const teamMembers = await member_model.find({ teamId: id });
     //   .populate('teamId');
     res.status(200).json(teamMembers);
   } catch (e) {
@@ -90,15 +87,31 @@ export const getTeamMembers = async (req, res) => {
   }
 };
 
-export const updateMember=async(req,res)=>{
-    const change=req.body;
-    const id=req.params.id;
-    try{
-        const updatedMember=await member_model.findByIdAndUpdate(id,change,{new: true});
-        res.status(200).json(updatedMember);
+export const updateMember = async (req, res) => {
+  const change = req.body;
+  const id = req.params.id;
+  try {
+    const updatedMember = await member_model.findByIdAndUpdate(id, change, {
+      new: true,
+    });
+    res.status(200).json(updatedMember);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json(e);
+  }
+};
 
-    }catch(e){
-        console.log(e)
-        res.status(500).json(e);
-    }
-}
+export const updateTeam = async (req, res) => {
+  const change = req.body;
+  const id = req.params.teamId;
+  try {
+    const updatedTeam = await team_model.findByIdAndUpdate(id, change, {
+      new: true,
+      upsert:true
+    });
+    res.status(200).json({message:"team updated",updatedTeam});
+  } catch (e) {
+    console.log(e);
+    res.status(500).json(e);
+  }
+};
