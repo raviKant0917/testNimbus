@@ -75,10 +75,12 @@ export const postTeams = async (request, response) => {
 
 export const getTeamMembers = async (req, res) => {
   const id = req.params.id;
+  let year = Number(req.query.year) || 2;
+
   //   const objectId = new ObjectId(id);
 
   try {
-    const teamMembers = await member_model.find({ teamId: id });
+    const teamMembers = await member_model.find({ teamId: id,year:year });
     //   .populate('teamId');
     res.status(200).json(teamMembers);
   } catch (e) {
@@ -93,6 +95,7 @@ export const updateMember = async (req, res) => {
   try {
     const updatedMember = await member_model.findByIdAndUpdate(id, change, {
       new: true,
+      upsert:true
     });
     res.status(200).json(updatedMember);
   } catch (e) {

@@ -22,6 +22,9 @@ const memberSchema = new mongoose.Schema({
   position: {
     type: String,
   },
+  year:{
+    type:Number
+  },
   image: {
     type: String,
   },
