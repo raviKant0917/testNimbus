@@ -24,7 +24,7 @@ export async function insertQuestions(req,res){
         id: req.body.id,
         question: req.body.question,
         options: req.body.options,
-        answer: req.body.answer
+        answer: req.body.answer 
       });
     
       try {
@@ -76,8 +76,8 @@ export async function getResult(req,res){
 export async function postResult(req,res){
     const newQuestion = new Result({
         username: req.body.username,
-    result: req.body.result,
-    points: req.body.points,
+        result: req.body.result,
+        points: req.body.points,
 
       });
     
@@ -99,4 +99,35 @@ export async function deleteResult(req,res){
      } catch (error) {
         res.status(400).json(error)
      }
+}
+export async function leaderBoard(req,res){
+  try {
+    const result = await Result.find({}).sort({points: -1});
+    res.status(200).json({
+      success: "true",
+      result: result
+    })
+  } catch (err) {
+    res.status(500).json({
+      success: "failed",
+      message: "something went wrong!"
+    })    
+  }
+}
+
+export async function getResultById(req,res){
+  const id = req.params.id;
+  try {
+    const result = await Result.find({_id: id});
+    res.status(200).json({
+      success: "true",
+      result: result
+    })
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({
+      success: "failed",
+      message: "something went wrong!"
+    })    
+  }
 }

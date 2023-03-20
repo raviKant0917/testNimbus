@@ -101,6 +101,11 @@
  *          - in: path
  *            name: id
  *            description: id of a team
+ *          - in: query
+ *            name: year
+ *            type: Number
+ *            default: 2
+ *            description: academic year of the member
  *            schema:
  *              type: string
  *            required: true

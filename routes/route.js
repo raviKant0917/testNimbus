@@ -1,7 +1,7 @@
 import express from 'express';
 import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserByFirebaseId,checkIfUserExist} from '../controllers/User-controller.js';
 import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd,getPostsOfUser } from '../controllers/post.js';
-import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember} from '../controllers/teams.js';
+import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember,updateTeam} from '../controllers/teams.js';
 import { getEvents,postEvents } from '../controllers/eventControllers.js';
 import * as controller from '../controllers/quizController.js'
 import { getRoomByRoomId, getRooms,joinRoom, leaveRoom} from '../controllers/omegle.js';
@@ -29,7 +29,7 @@ router.post("/posts",createPost);
 router.get("/posts",getPost);
 router.get("/posts/:postId",getAPost);
 router.patch("/posts/:id",updatePost);
-router.delete("posts/:id",deletePost);
+router.delete("/posts/:id",deletePost);
 router.put("/posts/:id/like",likePost);
 router.put("/posts/:id/comment",addComment);
 router.put("/posts/:id/comment/:commentId",deleteComment);
@@ -40,6 +40,7 @@ router.get("/potd",getPotd); //Potd=post of the day
 router.get("/teams",getTeams);
 router.get("/teams/:id",getTeamMembers);
 router.post("/teams",postTeams);
+router.patch("/teams/:teamId",updateTeam);
 
 router.get("/members",getMembers);
 router.post("/members",postMembers);
@@ -56,8 +57,11 @@ router.route('/questions')
 .delete(controller.deleteQuestions) //delete requestt
 
 router.route('/result')
-   .get(controller.getResult)
+   .get(controller.leaderBoard)
    .post(controller.postResult)
    .delete(controller.deleteResult)
 
+router.route('/result/:id')
+   .get(controller.getResultById)
+   
 export default router;
