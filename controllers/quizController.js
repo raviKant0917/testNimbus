@@ -3,8 +3,6 @@
 import Result from '../models/resultSchema.js'
 import  Questions  from '../models/questionSchema.js'
 
-
-
 export async function getQuestions(req,res){
      try {
         const q = await Questions.find();
@@ -24,7 +22,7 @@ export async function insertQuestions(req,res){
         id: req.body.id,
         question: req.body.question,
         options: req.body.options,
-        answer: req.body.answer 
+        answer: req.body.answer
       });
     
       try {
@@ -70,7 +68,7 @@ export async function getResult(req,res){
 //post user result
 export async function postResult(req,res){
     const newQuestion = new Result({
-        username: req.body.username,
+        userId: req.body.userId,
         result: req.body.result,
         points: req.body.points,
 
@@ -95,34 +93,18 @@ export async function deleteResult(req,res){
         res.status(400).json(error)
      }
 }
-export async function leaderBoard(req,res){
-  try {
-    const result = await Result.find({}).sort({points: -1});
-    res.status(200).json({
-      success: "true",
-      result: result
-    })
-  } catch (err) {
-    res.status(500).json({
-      success: "failed",
-      message: "something went wrong!"
-    })    
-  }
-}
 
-export async function getResultById(req,res){
-  const id = req.params.id;
+export async function getLeaderboard(req,res){
   try {
-    const result = await Result.find({_id: id});
+    const leaderboard = await Result.find({}).sort({points: -1});
+    console.log(leaderboard);
     res.status(200).json({
-      success: "true",
-      result: result
+      body:leaderboard
     })
   } catch (err) {
-    console.log(err.message);
     res.status(500).json({
-      success: "failed",
-      message: "something went wrong!"
+      success: 'failed',
+      message: "Something went wrong!"
     })    
   }
 }
