@@ -2,6 +2,8 @@
 // get all questions
 import Result from '../models/resultSchema.js'
 import  Questions  from '../models/questionSchema.js'
+import resultSchema from '../models/resultSchema.js';
+import { User } from '../models/users.js';
 
 export async function getQuestions(req,res){
      try {
@@ -67,16 +69,19 @@ export async function getResult(req,res){
 
 //post user result
 export async function postResult(req,res){
-    const newQuestion = new Result({
-        userId: req.body.userId,
-        result: req.body.result,
-        points: req.body.points,
-
-      });
-    
-      try {
+  
+  try {
+        const user =await User.findOne({_id:req.body.userId});
+        const newQuestion = new Result({
+            userId: req.body.userId,
+            result: req.body.result,
+            points: req.body.points,
+            profileImage:user.profileImage
+      
+          });
         const savedQuestion = await newQuestion.save();
         res.status(200).json(savedQuestion);
+        console.log(savedQuestion);
       } catch (err) {
         res.status(400).json({ message: err });
       }
@@ -107,4 +112,8 @@ export async function getLeaderboard(req,res){
       message: "Something went wrong!"
     })    
   }
+}
+
+export async function getResultById(req,res){
+  const userId = req.params.id
 }

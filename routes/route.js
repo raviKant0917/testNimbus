@@ -57,7 +57,7 @@ router.route('/questions')
 .delete(controller.deleteQuestions) //delete requestt
 
 router.route('/result')
-   .get(controller.leaderBoard)
+   .get(controller.getLeaderboard)
    .post(controller.postResult)
    .delete(controller.deleteResult)
 
