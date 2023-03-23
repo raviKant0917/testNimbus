@@ -40,13 +40,13 @@
  *      results:
  *          type: object
  *          required:
- *              - username
+ *              - userId
  *              - result
  *              - points
  *          properties:
- *           username:
+ *           userId:
  *            type: string
- *            description: username of the user
+ *            description: firebaseId of the user
  *           result: 
  *            type: string
  *            description: total score of the user
