@@ -67,12 +67,7 @@ export async function getResult(req,res){
     
 }
 
-//post result
-// username: {type: String},
-// result: { type:String, default:'how are you'},
-// points:{type:Number, default:0},
-// achieved: {type:String},
-// createdAt: {type: Date,default: Date.now}
+//post user result
 export async function postResult(req,res){
     const newQuestion = new Result({
         username: req.body.username,
