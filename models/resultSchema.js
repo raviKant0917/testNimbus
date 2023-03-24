@@ -7,6 +7,7 @@ const resultModel = new Schema({
     points:{type:Number, default:0,required: true},
     achieved: {type:String},
     profileImage: { type: String},
+    username:{type:String},
     createdAt: {type: Date,default: Date.now}
 });
 
