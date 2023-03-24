@@ -8,6 +8,22 @@ export const getRooms = async (req, res) => {
     });
 };
 
+export const getRoomByRoomId = async (req, res)=> {
+    const id = req.params.roomId;
+    try {
+        const result = await Room.find({_id: id});
+        res.status(200).json({
+            success: 'true',
+            body: result
+        })        
+    } catch (err) {
+        res.status(500).json({
+            success: "failed",
+            message: err.message
+        })        
+    }
+}
+
 export const joinRoom = async (req, res) => {
     const userId = req.params.userId;
     console.log(userId);

@@ -40,13 +40,13 @@
  *      results:
  *          type: object
  *          required:
- *              - username
+ *              - userId
  *              - result
  *              - points
  *          properties:
- *           username:
+ *           userId:
  *            type: string
- *            description: username of the user
+ *            description: firebaseId of the user
  *           result: 
  *            type: string
  *            description: total score of the user
@@ -143,6 +143,29 @@
 
 /**
  * @swagger
+ * /result/{id}:
+ *  get:
+ *      tags: ["Quiz - results"]
+ *      summary: Returns individual user result
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *      responses:
+ *          '200':    
+ *              description: everyone's result
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          items:
+ *                              $ref: '#/components/schemas/results' 
+*/
+
+/**
+ * @swagger
  * /result:
  *  post:
  *      tags: ["Quiz - results"]
@@ -155,6 +178,11 @@
  *                      type: object
  *                      items: 
  *                          $ref: '#/components/schemas/results'
+ *                      example:
+ *                          userId: kjh876hkj97
+ *                          result: Ist
+ *                          points: 50000
+ *                          achieved: 2
  *      responses:
  *          '200':    
  *              description: creates result of the user

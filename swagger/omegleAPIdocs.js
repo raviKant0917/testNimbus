@@ -72,6 +72,34 @@
 
 /**
  * @swagger
+ * /room/{roomId}:
+ *  get:
+ *      tags: ['Omegle']
+ *      summary: returns the room with given roomId
+ *      parameters: 
+ *          - in: path
+ *            name: roomId
+ *            type: string
+ *            required: true    
+ *      responses:
+ *          '200':    
+ *              description: successfully joined a room
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          items:
+ *                              $ref: '#/components/schemas/Room' 
+ *          '500':
+ *              description: failed
+ *          '400': 
+ *              description: room not found!
+ *      
+*/
+
+
+/**
+ * @swagger
  * /room/leave/{userId}:
  *  post:
  *      tags: ['Omegle']
