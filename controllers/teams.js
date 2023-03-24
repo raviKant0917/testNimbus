@@ -118,3 +118,14 @@ export const updateTeam = async (req, res) => {
     res.status(500).json(e);
   }
 };
+
+export const deleteMember=async(req,res)=>{
+  const memberId=req.params.id;
+  try{
+    const deletedMember=await member_model.findByIdAndDelete(memberId);
+    res.status(200).json({message:"member deleted",deletedMember});
+  }catch(e){
+    console.log(e);
+    res.status(500).json(e);
+  }
+}

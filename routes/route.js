@@ -1,7 +1,7 @@
 import express from 'express';
 import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserByFirebaseId,checkIfUserExist} from '../controllers/User-controller.js';
 import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd,getPostsOfUser } from '../controllers/post.js';
-import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember,updateTeam} from '../controllers/teams.js';
+import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember,updateTeam,deleteMember} from '../controllers/teams.js';
 import { getEvents,postEvents } from '../controllers/eventControllers.js';
 import * as controller from '../controllers/quizController.js'
 import { getRooms,joinRoom, leaveRoom} from '../controllers/omegle.js';
@@ -44,6 +44,7 @@ router.patch("/teams/:teamId",updateTeam);
 router.get("/members",getMembers);
 router.post("/members",postMembers);
 router.patch("/members/:id",updateMember);
+router.delete("/members/:id",deleteMember);
 
 //events 
 router.get("/events",getEvents);
