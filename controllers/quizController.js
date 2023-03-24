@@ -76,7 +76,8 @@ export async function postResult(req,res){
             userId: req.body.userId,
             result: req.body.result,
             points: req.body.points,
-            profileImage:user.profileImage
+            profileImage:user.profileImage,
+            username:user.userName
       
           });
         const savedQuestion = await newQuestion.save();
