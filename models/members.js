@@ -36,6 +36,7 @@ const memberSchema = new mongoose.Schema({
   },
   linkedin:{
     type:String
+    
   }
 });
 
