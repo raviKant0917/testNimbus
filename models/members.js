@@ -28,6 +28,15 @@ const memberSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  instagram:{
+    type:String
+  },
+  github:{
+    type:String
+  },
+  linkedin:{
+    type:String
+  }
 });
 
 const member_model = new mongoose.model("member", memberSchema);
