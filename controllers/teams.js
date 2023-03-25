@@ -39,7 +39,11 @@ export const postMembers = async (request, response) => {
       team_name: team.team_name,
       teamId: teamId,
       position: member.position,
+      year: member.year,
       image: member.image,
+      instagram: member.instagram,
+      github: member.github,
+      linkedin: member.linkedin
     });
 
     await user.save((err) => {
