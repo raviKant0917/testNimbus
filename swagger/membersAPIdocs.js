@@ -74,8 +74,12 @@
  *                      example:
  *                          teamId: 640788814470496094b3a488 
  *                          member_name: JATIN
- *                          position: Core Coordinator
+ *                          position: Second Year
+ *                          year: 2
  *                          image: https://cdn.vox-cdn.com/thumbor/8CIbT8aMgmLzG6vTzbWil2LwdWk=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/19938259/3zlqxf_copy.jpg
+ *                          instagram: https://www.instagram.com/
+ *                          github: https://github.com/
+ *                          linkedin: https://linkedin.com/
  *      responses:
  *          '200':    
  *              description: returns all members
