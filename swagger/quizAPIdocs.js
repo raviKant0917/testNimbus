@@ -113,7 +113,26 @@
  * /questions:
  *  delete:
  *      tags: ["Quiz - questions"]
+ *      summary: delete all question
+ *      responses:
+ *          '200':    
+ *              description: user was deleted 
+ *          '500':
+ *              description: something went wrong!
+ */
+
+/**
+ * @swagger
+ * /questions/{id}:
+ *  delete:
+ *      tags: ["Quiz - questions"]
  *      summary: delete a question
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
  *      responses:
  *          '200':    
  *              description: user was deleted 
@@ -141,28 +160,6 @@
  *                              $ref: '#/components/schemas/results' 
 */
 
-/**
- * @swagger
- * /result/{id}:
- *  get:
- *      tags: ["Quiz - results"]
- *      summary: Returns individual user result
- *      parameters:
- *          - in: path
- *            name: id
- *            schema:
- *              type: string
- *            required: true
- *      responses:
- *          '200':    
- *              description: everyone's result
- *              content: 
- *                  application/json:
- *                      schema:
- *                          type: object
- *                          items:
- *                              $ref: '#/components/schemas/results' 
-*/
 
 /**
  * @swagger
@@ -194,7 +191,7 @@
  *                              $ref: '#/components/schemas/User' 
  *          '500':
  *              description: could not fetch data!
- */
+*/
 
 
 /**
@@ -202,10 +199,55 @@
  * /result:
  *  delete:
  *      tags: ["Quiz - results"]
- *      summary: delete result
+ *      summary: delete all result
  *      responses:
  *          '200':    
  *              description: delete result 
  *          '500':
  *              description: something went wrong!
- */
+*/
+
+
+/**
+ * @swagger
+ * /result/{id}:
+ *  get:
+ *      tags: ["Quiz - results"]
+ *      summary: Returns individual user result
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *      responses:
+ *          '200':    
+ *              description: user result
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *                          items:
+ *                              $ref: '#/components/schemas/results' 
+*/
+
+
+/**
+ * @swagger
+ * /result/{id}:
+ *  delete:
+ *      tags: ["Quiz - results"]
+ *      summary: delete individual result
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            schema:
+ *              type: string
+ *            required: true
+ *      responses:
+ *          '200':    
+ *              description: delete result 
+ *          '500':
+ *              description: something went wrong!
+*/
+
