@@ -429,3 +429,20 @@
  *          '500':
  *              description: could not fetch data!
  */
+
+/**
+ * @swagger
+ * /postboard:
+ *  get:
+ *      tags: ['Posts']
+ *      summary: returns leaderboard of posts /top 10 posts
+ *      responses:
+ *          '200':    
+ *              description: all popular posts in past 24 hours
+ *              content: 
+ *                  application/json:
+ *                      schema:
+ *                          type: object
+ *          '500':
+ *              description: could not fetch data!
+ */

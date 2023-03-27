@@ -276,45 +276,47 @@ export const getLeaderboardofPosts = async (req, res) => {
       {
         $unwind: "$creator",
       },
-      {
-        $lookup: {
-          from: "users",
-          localField: "comments.postedBy",
-          foreignField: "_id",
-          as: "comments.postedBy",
-        },
-      },
-      {
-        $unwind: "$comments.postedBy",
-      },
-      {
-        $project: {
-          _id: 1,
-          caption: 1,
-          photo: 1,
-          isVideo: 1,
-          likeCount: 1,
-          likedbyMe: 1,
-          likes: 1,
-          comments: {
-            _id: 1,
-            text: 1,
-            postedBy: {
-              _id: "$comments.postedBy._id",
-              fullName: "$comments.postedBy.fullName",
-              profileImage: "$comments.postedBy.profileImage",
-            },
-          },
-          commentCount: 1,
-          createdAt: 1,
-          creator: {
-            _id: "$comments.postedBy._id",
-            fullName: "$comments.postedBy.fullName",
-            profileImage: "$comments.postedBy.profileImage",
-          },
-          total_likes_and_comments: 1,
-        },
-      },
+      // {
+      //   $lookup: {
+      //     from: "users",
+      //     localField: "comments.postedBy",
+      //     foreignField: "_id",
+      //     as: "comments.postedBy",
+          
+      //     // options: { preserveNullAndEmptyArrays: true, },
+      //   },
+      // },
+      // {
+      //   $unwind: { path: "$comments.postedBy", preserveNullAndEmptyArrays: true },
+      // },
+      // {
+      //   $project: {
+      //     _id: 1,
+      //     caption: 1,
+      //     photo: 1,
+      //     isVideo: 1,
+      //     likeCount: 1,
+      //     likedbyMe: 1,
+      //     likes: 1,
+      //     comments: {
+      //       _id: 1,
+      //       text: 1,
+      //       postedBy: {
+      //         _id: "$comments.postedBy._id",
+      //         fullName: "$comments.postedBy.fullName",
+      //         profileImage: "$comments.postedBy.profileImage",
+      //       },
+      //     },
+      //     commentCount: 1,
+      //     createdAt: 1,
+      //     creator: {
+      //       _id: "$comments.postedBy._id",
+      //       fullName: "$comments.postedBy.fullName",
+      //       profileImage: "$comments.postedBy.profileImage",
+      //     },
+      //     total_likes_and_comments: 1,
+      //   },
+      // },
     ]);
 
     if (!posts) {
@@ -329,102 +331,5 @@ export const getLeaderboardofPosts = async (req, res) => {
   }
 };
 
-////////////
 
-// const Post = mongoose.model('Post', new mongoose.Schema({
-//   caption: String,
-//   creator: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-//   photo: String,
-//   isVideo: {
-//     type: Boolean,
-//     default: false
-//   },
-//   likeCount: {
-//     type: Number,
-//     default: 0
-//   },
-//   likedbyMe: {
-//     type: Boolean,
-//     default: false
-//   },
-//   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-//   comments: [{
-//     text: String,
-//     postedBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
-//   }],
-//   commentCount: {
-//     type: Number,
-//     default: 0
-//   },
-//   createdAt: {
-//     type: Date,
-//     default: new Date()
-//   }
-// }));
 
-// const User = mongoose.model('User', new mongoose.Schema({
-//   name: String,
-//   email: String
-// }));
-
-// const now = new Date();
-// const yesterday = new Date(now.getTime() - (24 * 60 * 60 * 1000));
-
-// Post.aggregate([
-//   { $match: { createdAt: { $gte: yesterday, $lte: now } } },
-//   {
-//     $addFields: {
-//       total_likes_and_comments: { $add: ["$likeCount", "$commentCount"] }
-//     }
-//   },
-//   { $sort: { total_likes_and_comments: -1 } },
-//   { $limit: 10 },
-//   {
-//     $lookup: {
-//       from: 'users',
-//       localField: 'creator',
-//       foreignField: '_id',
-//       as: 'creator'
-//     }
-//   },
-//   {
-//     $unwind: '$creator'
-//   },
-//   {
-//     $lookup: {
-//       from: 'users',
-//       localField: 'comments.postedBy',
-//       foreignField: '_id',
-//       as: 'comments.postedBy'
-//     }
-//   },
-//   {
-//     $unwind: '$comments.postedBy'
-//   },
-//   {
-//     $project: {
-//       _id: 1,
-//       caption: 1,
-//       photo: 1,
-//       isVideo: 1,
-//       likeCount: 1,
-//       likedbyMe: 1,
-//       likes: 1,
-//       comments: {
-//         _id: 1,
-//         text: 1,
-//         postedBy: { _id: '$comments.postedBy._id',fullName: '$comments.postedBy.fullName',profileImage:'$comments.postedBy.profileImage'  }
-//       },
-//       commentCount: 1,
-//       createdAt: 1,
-//       creator:  { _id: '$comments.postedBy._id',fullName: '$comments.postedBy.fullName',profileImage:'$comments.postedBy.profileImage'  },
-//       total_likes_and_comments: 1
-//     }
-//   }
-// ])
-//   .then(result => {
-//     console.log(result);
-//   })
-//   .catch(error => {
-//     console.error(error);
-//   });

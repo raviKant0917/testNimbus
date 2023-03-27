@@ -78,14 +78,22 @@ export const postTeams = async (request, response) => {
 
 export const getTeamMembers = async (req, res) => {
   const id = req.params.id;
-  let year = Number(req.query.year) || 2;
+  
+  let year = Number(req.query.year)||0;
 
   //   const objectId = new ObjectId(id);
 
   try {
+    if(year==0){
+      const teamMembers = await member_model.find({teamId:id});
+      res.status(200).json(teamMembers);
+    }else{
+      
     const teamMembers = await member_model.find({ teamId: id,year:year });
-    //   .populate('teamId');
     res.status(200).json(teamMembers);
+    }
+    
+    
   } catch (e) {
     console.log(e);
     res.status(500).json(e);
