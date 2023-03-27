@@ -47,7 +47,7 @@
 /**
  * @swagger
  * /room/{userId}:
- *  post:
+ *  get:
  *      tags: ['Omegle']
  *      summary: user joins a room
  *      parameters: 
@@ -101,7 +101,7 @@
 /**
  * @swagger
  * /room/leave/{userId}:
- *  post:
+ *  get:
  *      tags: ['Omegle']
  *      summary: user leaves the room
  *      parameters: 
