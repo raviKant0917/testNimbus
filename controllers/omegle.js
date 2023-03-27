@@ -22,18 +22,41 @@ export const getRoomByRoomId = async (req, res)=> {
             message: err.message
         })        
     }
+    
 }
+// const retTime = (obj) => {
+//     console.log(obj);
+//     // let dateString = obj.createdAt;
+//     // let dateObject = new Date(dateString);
+//     // let hours = dateObject.getUTCHours() * 60 * 60;
+//     // let minutes = dateObject.getUTCMinutes() * 60;
+//     // let seconds = dateObject.getUTCSeconds();
+//     // //main time in seconds
+//     // const time = hours + minutes + seconds;
+//     // return time;
+//     console.log(roomsAvail[0]);
+//     const time = retTime(roomsAvail[0]);
+
+//     let currentTime = new Date();
+//     let timeInSeconds = Math.floor(currentTime.getTime() / 1000);
+    
+//     if((roomsAvail[0].createdAt + 60) > timeInSeconds){
+//         const id = roomsAvail[0]._id;
+//         await Room.deleteOne({_id: id});
+//     }
+// };
 
 export const joinRoom = async (req, res) => {
     const userId = req.params.userId;
     console.log(userId);
     const roomsAvail = await Room.find({ status: "oneUser" }).sort({
-        createdAt: 1,
+        updatedAt: 1,
     });
+    console.log(roomsAvail);
     if (Object.keys(roomsAvail).length != 0) {
         if (roomsAvail[0].user1Id == userId) {
             return res.status(500).json({
-                message: "user already in a room",
+                message: "user cannot be twice in same room",
                 solution: "provide a different userId",
                 room: roomsAvail[0],
             });
@@ -49,14 +72,6 @@ export const joinRoom = async (req, res) => {
     } else if (Object.keys(roomsAvail).length == 0) {
         console.log("here");
         const newRoom = await Room.create({ user1Id: userId ,status: 'oneUser'});
-        
-        // const createdAtTime = newRoom.createdAt;
-        // console.log(createdAtTime);
-        // createdAtTime.setSeconds(createdAtTime.getSeconds() + 30*1000);
-        // const timer = setTimeout(async() => {
-        //     await newRoom.delete();
-        //     console.log("Room deleted successfully");
-        // }, 10*1000);
 
         res.status(200).json({
             success: "true",
@@ -109,13 +124,10 @@ export const leaveRoom = async (req, res) => {
                 {new: true}
             );
         }
-        // const response = await Room.find({
-        //     $or: [{ user1Id: userId }, { user2Id: userId }],
-        // });
-
+        
         res.status(200).json({
             success: "true",
-            message: 'room dropped',
+            message: 'user left',
             result: `user with id ${userId} left the room`,
             result: response,
         });
