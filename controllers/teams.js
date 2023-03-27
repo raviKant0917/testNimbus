@@ -39,7 +39,11 @@ export const postMembers = async (request, response) => {
       team_name: team.team_name,
       teamId: teamId,
       position: member.position,
+      year: member.year,
       image: member.image,
+      instagram: member.instagram,
+      github: member.github,
+      linkedin: member.linkedin
     });
 
     await user.save((err) => {
@@ -55,20 +59,19 @@ export const postMembers = async (request, response) => {
 };
 
 export const postTeams = async (request, response) => {
-  const { team_name, image } = request.body;
+  // const { team_name, image } = request.body;
   try {
-    const team = new team_model({
-      team_name: team_name,
-      image: image,
-    });
+    const team = new team_model(request.body);
     await team.save((err) => {
       if (err) {
+        console.log(err);
         response.send(err);
       } else {
         response.status(200).send({ message: "team added" });
       }
     });
   } catch (e) {
+    console.log(e);
     response.status(500).send(e);
   }
 };
@@ -118,3 +121,25 @@ export const updateTeam = async (req, res) => {
     res.status(500).json(e);
   }
 };
+
+export const deleteMember=async(req,res)=>{
+  const memberId=req.params.id;
+  try{
+    const deletedMember=await member_model.findByIdAndDelete(memberId);
+    res.status(200).json({message:"member deleted",deletedMember});
+  }catch(e){
+    console.log(e);
+    res.status(500).json(e);
+  }
+}
+
+export const deleteTeam=async(req,res)=>{
+  const teamId=req.params.teamId;
+  try{
+    const deletedTeam=await team_model.findByIdAndDelete(teamId);
+    res.status(200).json({message:"team deleted",deletedTeam});
+  }catch(e){
+    console.log(e);
+    res.status(500).json(e);
+  }
+}

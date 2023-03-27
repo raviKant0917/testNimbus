@@ -2,8 +2,8 @@
 // get all questions
 import Result from '../models/resultSchema.js'
 import  Questions  from '../models/questionSchema.js'
-
-
+import resultSchema from '../models/resultSchema.js';
+import { User } from '../models/users.js';
 
 export async function getQuestions(req,res){
      try {
@@ -24,7 +24,7 @@ export async function insertQuestions(req,res){
         id: req.body.id,
         question: req.body.question,
         options: req.body.options,
-        answer: req.body.answer 
+        answer: req.body.answer
       });
     
       try {
@@ -67,23 +67,22 @@ export async function getResult(req,res){
     
 }
 
-//post result
-// username: {type: String},
-// result: { type:String, default:'how are you'},
-// points:{type:Number, default:0},
-// achieved: {type:String},
-// createdAt: {type: Date,default: Date.now}
+//post user result
 export async function postResult(req,res){
-    const newQuestion = new Result({
-        username: req.body.username,
-        result: req.body.result,
-        points: req.body.points,
-
-      });
-    
-      try {
+  
+  try {
+        const user =await User.findOne({_id:req.body.userId});
+        const newQuestion = new Result({
+            userId: req.body.userId,
+            result: req.body.result,
+            points: req.body.points,
+            profileImage:user.profileImage,
+            username:user.userName
+      
+          });
         const savedQuestion = await newQuestion.save();
         res.status(200).json(savedQuestion);
+        console.log(savedQuestion);
       } catch (err) {
         res.status(400).json({ message: err });
       }
@@ -100,34 +99,22 @@ export async function deleteResult(req,res){
         res.status(400).json(error)
      }
 }
-export async function leaderBoard(req,res){
+
+export async function getLeaderboard(req,res){
   try {
-    const result = await Result.find({}).sort({points: -1});
+    const leaderboard = await Result.find({}).sort({points: -1});
+    console.log(leaderboard);
     res.status(200).json({
-      success: "true",
-      result: result
+      body:leaderboard
     })
   } catch (err) {
     res.status(500).json({
-      success: "failed",
-      message: "something went wrong!"
+      success: 'failed',
+      message: "Something went wrong!"
     })    
   }
 }
 
 export async function getResultById(req,res){
-  const id = req.params.id;
-  try {
-    const result = await Result.find({_id: id});
-    res.status(200).json({
-      success: "true",
-      result: result
-    })
-  } catch (err) {
-    console.log(err.message);
-    res.status(500).json({
-      success: "failed",
-      message: "something went wrong!"
-    })    
-  }
+  const userId = req.params.id
 }
