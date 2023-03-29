@@ -46,7 +46,7 @@
 
 /**
  * @swagger
- * /room/{userId}:
+ * /room/join/{userId}:
  *  get:
  *      tags: ['Omegle']
  *      summary: user joins a room

@@ -20,7 +20,7 @@ router.delete("/users/:id",deleteUser);
 
 //omegle
 router.get("/room",getRooms);
-router.get("/room/:userId",joinRoom);
+router.get("/room/join/:userId",joinRoom);
 router.get("/room/:roomId",getRoomByRoomId);
 router.get("/room/leave/:userId",leaveRoom);
 
