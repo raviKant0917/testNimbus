@@ -59,6 +59,9 @@ router.route('/questions')
 .post(controller.insertQuestions) //post request
 .delete(controller.deleteQuestions) //delete requestt
 
+router.route('/questions/:id')
+  .delete(controller.deleteQuestionsbyId)
+
 router.route('/result')
    .get(controller.getLeaderboard)
    .post(controller.postResult)
@@ -66,5 +69,7 @@ router.route('/result')
 
 router.route('/result/:id')
    .get(controller.getResultById)
+   .delete(controller.deleteResultById)
+ 
    
 export default router;

@@ -13,6 +13,10 @@ const { Schema } = mongoose;
         required: true,
         default:'what is your name'
       },
+      set:{
+        type:Number,
+        
+      },
       options: [{
         type: String,
         required: true
