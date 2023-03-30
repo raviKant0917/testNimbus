@@ -248,3 +248,108 @@ export const getPostsOfUser = async (req, res) => {
     res.status(500).json(e);
   }
 };
+
+// getting leaderboard of all posts
+
+// export const getLeaderboardofPosts = async (req, res) => {
+//   const now = new Date();
+//   const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+
+//   try {
+//     const posts = await Postmodel.aggregate([
+//       { $match: { createdAt: { $gte: yesterday, $lte: now } } },
+//       {
+//         $addFields: {
+//           total_likes_and_comments: { $add: ["$likeCount", "$commentCount"] },
+//         },
+//       },
+//       { $sort: { total_likes_and_comments: -1 } },
+//       { $limit: 10 },
+//       {
+//         $lookup: {
+//           from: "users",
+//           localField: "creator",
+//           foreignField: "_id",
+//           as: "creator",
+//         },
+//       },
+//       {
+//         $unwind: "$creator",
+//       },
+//       // {
+//       //   $lookup: {
+//       //     from: "users",
+//       //     localField: "comments.postedBy",
+//       //     foreignField: "_id",
+//       //     as: "comments.postedBy",
+
+//       //     // options: { preserveNullAndEmptyArrays: true, },
+//       //   },
+//       // },
+//       // {
+//       //   $unwind: { path: "$comments.postedBy", preserveNullAndEmptyArrays: true },
+//       // },
+//       // {
+//       //   $project: {
+//       //     _id: 1,
+//       //     caption: 1,
+//       //     photo: 1,
+//       //     isVideo: 1,
+//       //     likeCount: 1,
+//       //     likedbyMe: 1,
+//       //     likes: 1,
+//       //     comments: {
+//       //       _id: 1,
+//       //       text: 1,
+//       //       postedBy: {
+//       //         _id: "$comments.postedBy._id",
+//       //         fullName: "$comments.postedBy.fullName",
+//       //         profileImage: "$comments.postedBy.profileImage",
+//       //       },
+//       //     },
+//       //     commentCount: 1,
+//       //     createdAt: 1,
+//       //     creator: {
+//       //       _id: "$comments.postedBy._id",
+//       //       fullName: "$comments.postedBy.fullName",
+//       //       profileImage: "$comments.postedBy.profileImage",
+//       //     },
+//       //     total_likes_and_comments: 1,
+//       //   },
+//       // },
+//     ]);
+
+//     if (!posts) {
+//       res.status(200).json({ message: "no posts found" });
+//     } else {
+//       console.log(posts);
+//       res.status(200).json(posts);
+//     }
+//   } catch (e) {
+//     console.log(e);
+//     res.status(500).json(e);
+//   }
+// };
+
+export const getLeaderboardofPosts = async (req, res) => {
+  const now = new Date();
+  const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+  try {
+    const posts = await Postmodel.find({
+      createdAt: { $gte: yesterday, $lte: now },
+    })
+      .sort({ likeCount: -1 })
+      .limit(10)
+      .populate("creator")
+      .populate({
+        path: "comments",
+        populate: {
+          path: "postedBy",
+        },
+      });
+    res.status(200).json(posts);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json(e);
+  }
+};

@@ -62,10 +62,12 @@
  *            description: points achieved
  *          example:
  *           username: 1
+ *           userId: kjdkjfkajlkjlkje234
  *           result: Ist
  *           points: 5
  *           achieved: 2
- *          
+ *           profileImage: ksjdfklj234
+ *           
 */
 
 /**
