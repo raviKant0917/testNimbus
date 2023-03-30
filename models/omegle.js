@@ -12,6 +12,6 @@ const roomSchema = new mongoose.Schema({
     type: String,
     enum: ['filled','oneUser']
   }
-},{timestamps: {updatedAt: false}});
+},{timestamps: true});
 
 export const Room = mongoose.model('Room',roomSchema);

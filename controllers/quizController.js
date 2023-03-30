@@ -103,7 +103,7 @@ export async function postResult(req,res){
             result: req.body.result,
             points: req.body.points,
             profileImage:user.profileImage,
-            username: user.userName
+            username:user.userName
       
           });
         const savedResult = await newResult.save();
