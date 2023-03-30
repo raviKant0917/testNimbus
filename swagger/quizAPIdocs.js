@@ -9,6 +9,7 @@
  *              - question
  *              - options
  *              - answer
+ *              - set
  *          properties:
  *           id:
  *            type: integer
@@ -24,11 +25,15 @@
  *           answer: 
  *            type: Integer
  *            description: correct option - 1,  if option 4 is correct => answer = 3   
+ *           set: 
+ *            type: Integer
+ *            description: question set no.
  *          example:
  *           id: 1
  *           question: who's your daddy
  *           options: [{'option1':'shubham'},{'option2':'shubham'},{'option3':'shubham'},{'option4':'shubham'},]
  *           answer: 2
+ *           set: 3
  *          
 */
 

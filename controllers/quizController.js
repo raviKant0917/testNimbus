@@ -5,18 +5,20 @@ import  Questions  from '../models/questionSchema.js'
 import resultSchema from '../models/resultSchema.js';
 import { User } from '../models/users.js';
 
-export async function getQuestions(req,res){
-     try {
-        const q = await Questions.find();
-        res.status(202).json(q) 
-     } catch (error) {
-        res.status(500).json({
-          status: 'failed',
-          message: error.message
-        })
-     };
-    
+export async function getQuestions(req, res) {
+  const setNumbers = [1, 2, 3, 4]; // Available set numbers
+  const randomSet = setNumbers[Math.floor(Math.random() * setNumbers.length)]; // Randomly select a set number
+  try {
+    const questions = await Questions.find({ set: randomSet });
+    res.status(200).json(questions);
+  } catch (error) {
+    res.status(500).json({
+      status: 'failed',
+      message: error.message
+    });
+  }
 }
+
 
 //insert question
 export async function insertQuestions(req,res){
@@ -25,7 +27,7 @@ export async function insertQuestions(req,res){
         question: req.body.question,
         options: req.body.options,
         answer: req.body.answer,
-        // set: Math.random()
+        set: req.body.set 
       });
     
       try {

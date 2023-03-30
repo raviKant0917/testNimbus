@@ -15,7 +15,7 @@ const { Schema } = mongoose;
       },
       set:{
         type:Number,
-        
+        required: true
       },
       options: [{
         type: String,
