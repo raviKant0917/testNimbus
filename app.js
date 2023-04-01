@@ -5,11 +5,13 @@ import Connection from './Database/db.js';
 import Router from './routes/route.js';
 import swaggerUi from 'swagger-ui-express';
 import { specs } from './swagger/swagger.Json.js';
+import { firebaseConn } from './middleware/initialiaseFirebase.js';
 
 mongoose.set('strictQuery', false);
 
-const app=express();
-const port=process.env.PORT||8050;
+const app = express();
+const port = process.env.PORT||8050;
+
 
 app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(specs));
 app.use(express.json())

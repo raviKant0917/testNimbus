@@ -1,4 +1,5 @@
 import express from 'express';
+import { authMiddleware } from '../middleware/authController.js';
 import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserByFirebaseId,checkIfUserExist} from '../controllers/User-controller.js';
 import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd,getPostsOfUser, getLeaderboardofPosts } from '../controllers/post.js';
 import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember,updateTeam,deleteMember,deleteTeam} from '../controllers/teams.js';
@@ -10,10 +11,10 @@ import { getRoomByRoomId, getRooms,joinRoom, leaveRoom} from '../controllers/ome
 const router =express.Router(); 
 
 //users
-router.get("/users/:firebaseid",getUserByFirebaseId);
-router.get("/users/search/:key",getUsersByName);
-router.get('/users',getUsers);
-router.get('/users/exist/:email',checkIfUserExist);
+router.get("/users/:firebaseid",authMiddleware,getUserByFirebaseId);
+router.get("/users/search/:key",authMiddleware,getUsersByName);
+router.get('/users',authMiddleware,getUsers);
+router.get('/users/exist/:email',authMiddleware,checkIfUserExist);
 router.post("/users",postUsers);
 router.patch("/users/:id",patchUser);
 router.delete("/users/:id",deleteUser);

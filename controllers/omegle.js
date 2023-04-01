@@ -32,6 +32,25 @@ export const joinRoom = async (req, res) => {
     });
     console.log(roomsAvail);
     if (Object.keys(roomsAvail).length != 0) {
+        let createdAt = roomsAvail[0].createdAt; // example createdAt string
+        let createdAtInSeconds = Math.floor(
+            new Date(createdAt).getTime() / 1000
+        ); // convert to seconds
+        console.log(createdAtInSeconds);
+
+        let currentTimeInSeconds = Math.floor(Date.now() / 1000); // get current time in seconds
+        console.log(currentTimeInSeconds);
+        console.log(roomsAvail[0]._id.toString().split("\"")[1]);
+        const id = roomsAvail[0]._id.toString().split("\"")[1];
+        console.log(id);
+        if(currentTimeInSeconds > createdAtInSeconds + 1){
+            const del = await Room.findByIdAndDelete(id);
+
+            console.log("huya kya",del);
+        }
+    }
+
+    if (Object.keys(roomsAvail).length != 0) {
         if (roomsAvail[0].user1Id == userId) {
             return res.status(500).json({
                 message: "user cannot be twice in same room",
@@ -60,7 +79,7 @@ export const joinRoom = async (req, res) => {
                 res.status(200).json({
                     success: "true",
                     message: "user already in a room",
-                    room: user
+                    room: user,
                 });
             } else {
                 const newRoom = await Room.create({
@@ -89,10 +108,10 @@ export const leaveRoom = async (req, res) => {
         });
         console.log(result);
         if (result) {
-            res.status(500).json({
+            res.status(200).json({
                 success: "true",
                 message: "room deleted!",
-                room: result
+                room: result,
             });
         } else {
             res.status(200).json({
