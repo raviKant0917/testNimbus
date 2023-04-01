@@ -11,10 +11,10 @@ import { getRoomByRoomId, getRooms,joinRoom, leaveRoom} from '../controllers/ome
 const router =express.Router(); 
 
 //users
-router.get("/users/:firebaseid",authMiddleware,getUserByFirebaseId);
-router.get("/users/search/:key",authMiddleware,getUsersByName);
-router.get('/users',authMiddleware,getUsers);
-router.get('/users/exist/:email',authMiddleware,checkIfUserExist);
+router.get("/users/:firebaseid",getUserByFirebaseId);
+router.get("/users/search/:key",getUsersByName);
+router.get('/users',getUsers);
+router.get('/users/exist/:email',checkIfUserExist);
 router.post("/users",postUsers);
 router.patch("/users/:id",patchUser);
 router.delete("/users/:id",deleteUser);

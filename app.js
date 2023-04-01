@@ -6,13 +6,14 @@ import Router from './routes/route.js';
 import swaggerUi from 'swagger-ui-express';
 import { specs } from './swagger/swagger.Json.js';
 import { firebaseConn } from './middleware/initialiaseFirebase.js';
+import { authMiddleware } from './middleware/authController.js';
 
 mongoose.set('strictQuery', false);
 
 const app = express();
 const port = process.env.PORT||8050;
 
-
+app.use('/',authMiddleware);
 app.use("/api-docs",swaggerUi.serve,swaggerUi.setup(specs));
 app.use(express.json())
 app.use(cors())
