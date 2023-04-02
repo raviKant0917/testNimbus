@@ -1,14 +1,11 @@
-//  *  securitySchemes:
-//  *      bearerAuth:
-//  *          type: http
-//  *          scheme: bearer
-//  *          bearerFormat: JWT
-
-
-
 /**
  * @swagger
  * components:
+ *  securitySchemes:
+ *      bearerAuth:
+ *          type: http
+ *          scheme: bearer
+ *          bearerFormat: JWT
  *  schemas:
  *      User:
  *          type: object

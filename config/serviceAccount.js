@@ -5,7 +5,7 @@ export const serviceAccount = {
     type: "service_account",
     project_id: "nimbus2k23",
     private_key_id: `${process.env.private_key_id}`,
-    private_key:`${process.env.private_key}`,
+    private_key: `${process.env.private_key.replace(/\\n/g, "\n")}`,
     client_email: "firebase-adminsdk-kz5hz@nimbus2k23.iam.gserviceaccount.com",
     client_id: `${process.env.client_id}`,
     auth_uri: "https://accounts.google.com/o/oauth2/auth",

@@ -5,7 +5,7 @@ import { serviceAccount } from "../config/serviceAccount.js"; //getting private 
 
 firebase.initializeApp({
     credential: firebase.credential.cert(serviceAccount),
-});
+})
 
 export const authMiddleware = async (req, res, next) => {
     const headerToken = req.headers.authorization;

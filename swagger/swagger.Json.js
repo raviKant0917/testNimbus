@@ -16,16 +16,16 @@ const options = {
                 url: "https://jsonplaceholder.typicode.com",
             },
         },
-        // securityDefinitions: {
-        //     bearerAuth: {
-        //         type: "apiKey",
-        //         name: "Authorization",
-        //         scheme: "bearer",
-        //         in: "header",
-        //         description: `Enter your token in format 'Bearer {token}'`
-        //     },
-        // },
-        // security: [{ bearerAuth: [] }],
+        securityDefinitions: {
+            bearerAuth: {
+                type: "apiKey",
+                name: "Authorization",
+                scheme: "bearer",
+                in: "header",
+                description: `Enter your token in format 'Bearer {token}'`
+            },
+        },
+        security: [{ bearerAuth: [] }],
         servers: [
             {
                 url: "https://test4-deh4.onrender.com",
