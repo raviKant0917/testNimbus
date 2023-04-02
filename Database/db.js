@@ -1,12 +1,16 @@
 import mongoose from "mongoose";
 
-const DB = "mongodb+srv://ravi:nimbus2k23@cluster0.ahvyxrx.mongodb.net/?retryWrites=true&w=majority"
+
+
 const connectionParams={
     useNewUrlParser: true,
     useUnifiedTopology: true 
 }
 
-const Connection = async () => {
+const Connection = async (username,password) => {
+
+    const DB = `mongodb+srv://${username}:${password}@cluster0.ahvyxrx.mongodb.net/?retryWrites=true&w=majority`
+    
     try {
         await mongoose.connect(DB,connectionParams);
         console.log('Database connected successfully');
