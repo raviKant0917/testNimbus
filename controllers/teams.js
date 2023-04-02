@@ -21,7 +21,7 @@ export const getMembers = async (request, response) => {
 export const getTeams = async (request, response) => {
   try {
     // const{page=1,limit=5}=request.query;
-    const teams = await team_model.find();
+    const teams = await team_model.find().sort({priority:-1});
     response.status(200).json(teams);
   } catch (error) {
     response.status(500).json(error);
@@ -151,3 +151,15 @@ export const deleteTeam=async(req,res)=>{
     res.status(500).json(e);
   }
 }
+
+//update all members of teams by teamId
+// export const updateAllMembers = async(req,res)=>{
+//   const teamId=req.params.teamId;
+//   const update=req.body;
+//   try{
+//     await member_model.updateMany({teamId:teamId},update);
+//     res.status(200).json({message:"all members updated"})
+//   }catch(e){
+//     res.status(500).json(e);
+//   }
+// }
