@@ -2,8 +2,8 @@ import express from 'express';
 import { authMiddleware } from '../middleware/authController.js';
 import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserByFirebaseId,checkIfUserExist} from '../controllers/User-controller.js';
 import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd,getPostsOfUser, getLeaderboardofPosts } from '../controllers/post.js';
-import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember,updateTeam,deleteMember,deleteTeam} from '../controllers/teams.js';
-import { getEvents,postEvents } from '../controllers/eventControllers.js';
+import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember,updateTeam,deleteMember,deleteTeam,} from '../controllers/teams.js';
+import { getEvents,postEvents,deleteEvents,updateEvents } from '../controllers/eventControllers.js';
 import * as controller from '../controllers/quizController.js'
 import { getRoomByRoomId, getRooms,joinRoom, leaveRoom} from '../controllers/omegle.js';
 
@@ -45,6 +45,7 @@ router.post("/teams",postTeams);
 router.patch("/teams/:teamId",updateTeam);
 router.delete("/teams/:teamId",deleteTeam);
 
+
 router.get("/members",getMembers);
 router.post("/members",postMembers);
 router.patch("/members/:id",updateMember);
@@ -53,6 +54,8 @@ router.delete("/members/:id",deleteMember);
 //events 
 router.get("/events",getEvents);
 router.post("/events",postEvents);
+router.delete("/events/:id",deleteEvents);
+router.patch("/events/:id",updateEvents);
 
 
 router.route('/questions')

@@ -20,6 +20,9 @@ const teamSchema= new mongoose.Schema({
     },
     linkedIn:{
         type:String
+    },
+    priority:{
+        type:Number
     }
 })
 
