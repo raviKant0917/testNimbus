@@ -19,20 +19,21 @@ To start the backend follow:\
 						"token_uri": "<tokenUri>",\
 						"auth_provider_x509_cert_url": "<authProvider>",\
 						"client_x509_cert_url": "<clientCertUrl>"\
-				}\			
+				}
 \
 \
-5. set following environment variables = \ 
+5. set following environment variables\ 
 			a. PASSWORD - mongodb database password\
 			b. USER_NAME - mongodb database username\
 			now get these below env varibles from project settings in your fiebase\
 			c. private_key_id\
 			d. private_key\
 			e. client_id\
-				these three can be obtained from firebase serviceAccountConfig file\
+				these three can be obtained from firebase serviceAccountConfig file
 
 ##
 Now finally start the backend on 8050 localhost port
+	by **node app.js** or **npdemon app.js** (to start with nodemon)
 ##
 you need to keep in mind to provide firebase idToken for every request in header as - \
 		**Bearer  {Token}** exclude " " in actual request.
