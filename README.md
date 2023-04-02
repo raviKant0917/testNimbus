@@ -9,16 +9,16 @@ To start the backend follow:\
 			![enter image description here](https://cdn-images-1.medium.com/max/800/1*DnA2gelvhAchJ2ywiOPWug.png)\
 			![enter image description here](https://cdn-images-1.medium.com/max/800/1*Pv9SqC1GqCQuOWG3WQZanQ.png)\
 				{\
-						"type": "service_account",
-						"project_id": "<projetId>",
-						"private_key_id": "<privateKeyId>",
-						"private_key": "<privateKey>",
-						"client_email": "<clientEmail>",
-						"client_id": "<clientId>",
-						"auth_uri": "<authUri>",
-						"token_uri": "<tokenUri>",
-						"auth_provider_x509_cert_url": "<authProvider>",
-						"client_x509_cert_url": "<clientCertUrl>"
+						"type": "service_account",\
+						"project_id": "<projetId>",\
+						"private_key_id": "<privateKeyId>",\
+						"private_key": "<privateKey>",\
+						"client_email": "<clientEmail>",\
+						"client_id": "<clientId>",\
+						"auth_uri": "<authUri>",\
+						"token_uri": "<tokenUri>",\
+						"auth_provider_x509_cert_url": "<authProvider>",\
+						"client_x509_cert_url": "<clientCertUrl>"\
 				}			
 
 
@@ -33,10 +33,13 @@ To start the backend follow:\
 
 ##
 Now finally start the backend on 8050 localhost port\
-		by **node app.js** or **npdemon app.js** (to start with nodemon)
+		by\
+	**node app.js**\ 
+	**npdemon app.js** (to start with nodemon)
 ##
-you need to keep in mind to provide firebase idToken for every request in headers as - 
-		\**Bearer  {Token}** exclude " " in actual request.
+you need to keep in mind to provide firebase idToken for every request in headers as\ 
+		**Bearer  {Token}**\ 
+	exclude " " in actual request.
 
 ##
 
