@@ -1,4 +1,5 @@
 import express from 'express';
+import { authMiddleware } from '../middleware/authController.js';
 import { getUsers,postUsers,patchUser, deleteUser,getUsersByName,getUserByFirebaseId,checkIfUserExist} from '../controllers/User-controller.js';
 import { getPost,createPost,updatePost,deletePost,likePost,addComment,deleteComment,getAPost,getPotd,getPostsOfUser, getLeaderboardofPosts } from '../controllers/post.js';
 import { getMembers,getTeams,postMembers,postTeams,getTeamMembers ,updateMember,updateTeam,deleteMember,deleteTeam,} from '../controllers/teams.js';
@@ -20,7 +21,7 @@ router.delete("/users/:id",deleteUser);
 
 //omegle
 router.get("/room",getRooms);
-router.get("/room/:userId",joinRoom);
+router.get("/room/join/:userId",joinRoom);
 router.get("/room/:roomId",getRoomByRoomId);
 router.get("/room/leave/:userId",leaveRoom);
 
@@ -62,6 +63,9 @@ router.route('/questions')
 .post(controller.insertQuestions) //post request
 .delete(controller.deleteQuestions) //delete requestt
 
+router.route('/questions/:id')
+  .delete(controller.deleteQuestionsbyId)
+
 router.route('/result')
    .get(controller.getLeaderboard)
    .post(controller.postResult)
@@ -69,5 +73,7 @@ router.route('/result')
 
 router.route('/result/:id')
    .get(controller.getResultById)
+   .delete(controller.deleteResultById)
+ 
    
 export default router;

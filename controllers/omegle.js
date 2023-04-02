@@ -8,43 +8,21 @@ export const getRooms = async (req, res) => {
     });
 };
 
-export const getRoomByRoomId = async (req, res)=> {
+export const getRoomByRoomId = async (req, res) => {
     const id = req.params.roomId;
     try {
-        const result = await Room.find({_id: id});
+        const result = await Room.find({ _id: id });
         res.status(200).json({
-            success: 'true',
-            body: result
-        })        
+            success: "true",
+            body: result,
+        });
     } catch (err) {
         res.status(500).json({
             success: "failed",
-            message: err.message
-        })        
+            message: err.message,
+        });
     }
-    
-}
-// const retTime = (obj) => {
-//     console.log(obj);
-//     // let dateString = obj.createdAt;
-//     // let dateObject = new Date(dateString);
-//     // let hours = dateObject.getUTCHours() * 60 * 60;
-//     // let minutes = dateObject.getUTCMinutes() * 60;
-//     // let seconds = dateObject.getUTCSeconds();
-//     // //main time in seconds
-//     // const time = hours + minutes + seconds;
-//     // return time;
-//     console.log(roomsAvail[0]);
-//     const time = retTime(roomsAvail[0]);
-
-//     let currentTime = new Date();
-//     let timeInSeconds = Math.floor(currentTime.getTime() / 1000);
-    
-//     if((roomsAvail[0].createdAt + 60) > timeInSeconds){
-//         const id = roomsAvail[0]._id;
-//         await Room.deleteOne({_id: id});
-//     }
-// };
+};
 
 export const joinRoom = async (req, res) => {
     const userId = req.params.userId;
@@ -53,6 +31,7 @@ export const joinRoom = async (req, res) => {
         updatedAt: 1,
     });
     console.log(roomsAvail);
+
     if (Object.keys(roomsAvail).length != 0) {
         if (roomsAvail[0].user1Id == userId) {
             return res.status(500).json({
@@ -64,72 +43,68 @@ export const joinRoom = async (req, res) => {
         console.log("lkjhgfff");
         roomsAvail[0].user2Id = userId;
         roomsAvail[0].status = "filled";
-        roomsAvail[0].save();
+        await roomsAvail[0].save();
         res.status(200).json({
             success: "true",
             room: roomsAvail[0],
         });
     } else if (Object.keys(roomsAvail).length == 0) {
         console.log("here");
-        const newRoom = await Room.create({ user1Id: userId ,status: 'oneUser'});
+        try {
+            const user = await Room.find({
+                $or: [{ user1Id: userId }, { user2Id: userId }],
+            });
+            console.log("in try", Object.keys(user).length, user);
 
-        res.status(200).json({
-            success: "true",
-            message: `user joined in roomId = ${newRoom._id}`,
-            room: newRoom,
-        });
+            if (Object.keys(user).length != 0) {
+                console.log("in if under try");
+                res.status(200).json({
+                    success: "true",
+                    message: "user already in a room",
+                    room: user,
+                });
+            } else {
+                const newRoom = await Room.create({
+                    user1Id: userId,
+                    status: "oneUser",
+                });
+                res.status(200).json({
+                    success: "true",
+                    message: `user joined in roomId = ${newRoom._id}`,
+                    room: newRoom,
+                });
+            }
+        } catch (error) {
+            res.status(500).json({
+                message: "failed",
+                error: error.message,
+            });
+        }
     }
 };
-
 export const leaveRoom = async (req, res) => {
-    let response;
     const userId = req.params.userId;
-    const result = await Room.find({
-        $or: [{ user1Id: userId }, { user2Id: userId }],
-    });
-    console.log(typeof result);
-    if(Object.keys(result).length == 0){
-        return res.status(404).json({
-            success: "failed",
-            result: 'user is not in any room'
-        })
-    }
-    if (result[0].status === "oneUser") {
-        const status = await Room.findByIdAndDelete(result[0]._id);
-        return res.status(200).json({
-            success: "true",
-            message: "room was empty.So deleted",
-            deleted: status,
+    try {
+        const result = await Room.findOneAndDelete({
+            $or: [{ user1Id: userId }, { user2Id: userId }],
         });
-    } else {
-        if (result[0].user1Id === userId) {
-            const temp = result[0].user2Id;
-            console.log(temp);
-            response = await Room.findOneAndUpdate(
-                { _id: result[0]._id },
-                {
-                    $unset: { user2Id: true },
-                    status: "oneUser",
-                },
-                {new: true}
-            );
+        console.log(result);
+        if (result) {
+            res.status(200).json({
+                success: "true",
+                message: "room deleted!",
+                room: result,
+            });
         } else {
-            console.log("user2");
-            response = await Room.findOneAndUpdate(
-                { _id: result[0]._id },
-                {
-                    $unset: { user2Id: true },
-                    status: "oneUser",
-                },
-                {new: true}
-            );
+            res.status(200).json({
+                success: "true",
+                message: "user not in any room!",
+            });
         }
-        
-        res.status(200).json({
-            success: "true",
-            message: 'user left',
-            result: `user with id ${userId} left the room`,
-            result: response,
+    } catch (error) {
+        res.status(500).json({
+            message: "Something went wrong",
+            error: error.message,
         });
     }
 };
