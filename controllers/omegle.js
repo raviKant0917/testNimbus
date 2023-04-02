@@ -31,24 +31,6 @@ export const joinRoom = async (req, res) => {
         updatedAt: 1,
     });
     console.log(roomsAvail);
-    if (Object.keys(roomsAvail).length != 0) {
-        let createdAt = roomsAvail[0].createdAt; // example createdAt string
-        let createdAtInSeconds = Math.floor(
-            new Date(createdAt).getTime() / 1000
-        ); // convert to seconds
-        console.log(createdAtInSeconds);
-
-        let currentTimeInSeconds = Math.floor(Date.now() / 1000); // get current time in seconds
-        console.log(currentTimeInSeconds);
-        console.log(roomsAvail[0]._id.toString().split("\"")[1]);
-        const id = roomsAvail[0]._id.toString().split("\"")[1];
-        console.log(id);
-        if(currentTimeInSeconds > createdAtInSeconds + 1){
-            const del = await Room.findByIdAndDelete(id);
-
-            console.log("huya kya",del);
-        }
-    }
 
     if (Object.keys(roomsAvail).length != 0) {
         if (roomsAvail[0].user1Id == userId) {
