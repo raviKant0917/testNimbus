@@ -34,11 +34,11 @@ To start the backend follow:\
 ##
 Now finally start the backend on 8050 localhost port\
 		by\
-	**node app.js**\ 
-	**npdemon app.js** (to start with nodemon)
+	**node app.js**   
+	**nodemon app.js** (to start with nodemon)  
 ##
-you need to keep in mind to provide firebase idToken for every request in headers as\ 
-		**Bearer  {Token}**\ 
+you need to keep in mind to provide firebase idToken for every request in headers as <br /> 
+		**Bearer  {Token}**<br />
 	exclude " " in actual request.
 
 ##
