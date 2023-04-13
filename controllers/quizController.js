@@ -81,20 +81,6 @@ export async function getResult(req,res){
 }
 
 
-//sets of question
-
-// const QuestionModel = require('./questionModel');
-
-// const numberOfQuestions = 10;
-
-// Questions.aggregate([{$sample: {size: numberOfQuestions}}], (err, questions) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     console.log(questions);
-//   }
-// });
-
 //post user result
 export async function postResult(req,res){
   
