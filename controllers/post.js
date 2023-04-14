@@ -336,7 +336,7 @@ export const getLeaderboardofPosts = async (req, res) => {
   const yesterday = new Date(now.getTime() - 24 * 60 * 60 * 1000);
   try {
     const posts = await Postmodel.find({
-      createdAt: { $gte: yesterday, $lte: now },
+      createdAt: { $gte: yesterday},
     })
       .sort({ likeCount: -1 })
       .limit(10)
