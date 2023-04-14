@@ -96,25 +96,51 @@ export async function getResult(req,res){
 // });
 
 //post user result
-export async function postResult(req,res){
+// export async function postResult(req,res){
   
-  try {
-        const user =await User.findOne({_id:req.body.userId});
-        const newResult = new Result({
+//   try {
+//     const newResult = new Result({
+//       userId: req.body.userId,
+//       result: req.body.result,
+//       points: req.body.points,
+//       profileImage:user.profileImage,
+//       username:user.userName
+      
+//           });
+//         const savedResult = await newResult.save();
+//         res.status(200).json(savedResult);
+//         console.log(savedResult);
+//       } catch (err) {
+//         res.status(400).json({ message: err });
+//       }
+//     }
+
+    export async function postResult(req, res) {
+      try {
+        const existingResult = await Result.findOne({ userId: req.body.userId});
+        let updatedResult;
+        if (existingResult) {
+          existingResult.points += req.body.points;
+          updatedResult = await existingResult.save();
+        } else {
+          const user =await User.findOne({_id:req.body.userId});
+          const newResult = new Result({
             userId: req.body.userId,
             result: req.body.result,
             points: req.body.points,
             profileImage:user.profileImage,
             username:user.userName
-      
           });
-        const savedResult = await newResult.save();
-        res.status(200).json(savedResult);
-        console.log(savedResult);
+          updatedResult = await newResult.save();
+        }
+        res.status(200).json(updatedResult);
       } catch (err) {
         res.status(400).json({ message: err });
       }
     }
+    
+
+
 
 
 //delete  all result result
