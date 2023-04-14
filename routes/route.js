@@ -62,14 +62,18 @@ router.route('/questions')
 router.route('/questions/:id')
   .delete(controller.deleteQuestionsbyId)
 
-router.route('/result')
-   .get(controller.getLeaderboard)
-   .post(controller.postResult)
-   .delete(controller.deleteResult)
+  router.route('/result')
+  .get(controller.getLeaderboard)
+  .post(controller.postResult)
+  .delete(controller.deleteResult)
+  
+   
 
 router.route('/result/:id')
    .get(controller.getResultById)
    .delete(controller.deleteResultById)
+
+
  
    
 export default router;
